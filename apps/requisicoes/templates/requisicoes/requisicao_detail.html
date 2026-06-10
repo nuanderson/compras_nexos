@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block page_title %}Requisição #{{ requisicao.pk }}{% endblock %}
+{% block page_actions %}
+  {% if requisicao.status == 'RASCUNHO' %}
+    <a href="{% url 'requisicoes:editar' requisicao.pk %}" class="btn btn-secondary">Editar</a>
+    <button hx-post="{% url 'requisicoes:enviar' requisicao.pk %}"
+            hx-target="body"
+            hx-swap="none"
+            hx-on::after-request="if(event.detail.successful) window.location.reload()"
+            class="btn btn-primary">Enviar para Aprovação</button>
+  {% endif %}
+  {% if requisicao.status == 'RASCUNHO' or requisicao.status == 'PENDENTE_GESTOR' %}
+    <button hx-post="{% url 'requisicoes:cancelar' requisicao.pk %}"
+            hx-target="body"
+            hx-swap="none"
+            hx-on::after-request="if(event.detail.successful) window.location.href='{% url 'requisicoes:lista' %}'"
+            class="btn btn-ghost"
+            style="color:var(--color-destructive)"
+            onclick="return confirm('Confirmar cancelamento?')">Cancelar Requisição</button>
+  {% endif %}
+{% endblock %}
+{% block content %}
+<div class="card" style="max-width:720px;margin-bottom:24px;">
+  <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Dados da Requisição</h3>
+  <dl style="display:grid;grid-template-columns:180px 1fr;gap:8px 16px;">
+    <dt class="text-muted" style="font-size:14px;">Status</dt>
+    <dd>
+      {% comment %}Badge de status com polling HTMX de 15s (REQ-02){% endcomment %}
+      <span id="status-badge-container"
+            hx-get="{% url 'requisicoes:status' requisicao.pk %}"
+            hx-trigger="every 15s"
+            hx-swap="outerHTML">
+        {% include "requisicoes/partials/status_badge.html" %}
+      </span>
+    </dd>
+
+    <dt class="text-muted" style="font-size:14px;">Descrição</dt>
+    <dd>{{ requisicao.descricao }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Categoria</dt>
+    <dd>{{ requisicao.categoria.nome }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Valor Estimado</dt>
+    <dd>R$ {{ requisicao.valor_estimado|floatformat:2 }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Justificativa</dt>
+    <dd>{{ requisicao.justificativa }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Unidade</dt>
+    <dd>{{ requisicao.unidade.nome }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Solicitante</dt>
+    <dd>{% if requisicao.criado_por %}{{ requisicao.criado_por.get_full_name|default:requisicao.criado_por.email }}{% else %}—{% endif %}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Data de Criação</dt>
+    <dd>{{ requisicao.criado_em|date:"d/m/Y H:i" }}</dd>
+
+    <dt class="text-muted" style="font-size:14px;">Última Atualização</dt>
+    <dd>{{ requisicao.atualizado_em|date:"d/m/Y H:i" }}</dd>
+  </dl>
+</div>
+
+{% comment %}Histórico de movimentações (REQ-03){% endcomment %}
+{% include "requisicoes/partials/historico.html" %}
+{% endblock %}

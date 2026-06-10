@@ -1,0 +1,38 @@
+{% comment %}
+Histórico de aprovações da requisição. (REQ-03)
+
+Exibe cada AprovacaoLog com: evento, ator, data, motivo.
+{% endcomment %}
+<div class="card" style="margin-top:24px;">
+  <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Histórico de Movimentações</h3>
+  {% if logs %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Evento</th>
+            <th>Responsável</th>
+            <th>Data/Hora</th>
+            <th>Motivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td>
+              <span class="badge {% if log.evento == 'ENVIO' %}badge-aguardando{% elif log.evento == 'APROVACAO_GESTOR' or log.evento == 'APROVACAO_FINAL' %}badge-ativo{% elif log.evento == 'REPROVACAO' %}badge-inativo{% else %}badge-rascunho{% endif %}">
+                {{ log.get_evento_display }}
+              </span>
+            </td>
+            <td>{% if log.aprovador %}{{ log.aprovador.get_full_name|default:log.aprovador.email }}{% else %}Sistema{% endif %}</td>
+            <td>{{ log.criado_em|date:"d/m/Y H:i" }}</td>
+            <td>{{ log.motivo|default:"—" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted">Nenhuma movimentação registrada.</p>
+  {% endif %}
+</div>

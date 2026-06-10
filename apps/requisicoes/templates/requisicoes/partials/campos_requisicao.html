@@ -1,0 +1,29 @@
+{% comment %}
+Campos do formulário de requisição.
+
+Retornado tanto em erro de validação (HTMX swap) quanto pelo copiar-dados.
+Inclui o script de aplicação de classes CSS — obrigatório para estilo correto.
+{% endcomment %}
+<form hx-post="{% if requisicao %}{% url 'requisicoes:editar' requisicao.pk %}{% else %}{% url 'requisicoes:nova' %}{% endif %}"
+      hx-target="#form-container"
+      hx-swap="innerHTML">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+      {{ field }}
+      {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+      {% if requisicao %}Salvar Alterações{% else %}Salvar Rascunho{% endif %}
+    </button>
+    <a href="{% url 'requisicoes:lista' %}" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+<script>
+document.querySelectorAll('#form-container input, #form-container select, #form-container textarea').forEach(function(el) {
+  el.classList.add(el.tagName.toLowerCase() === 'select' ? 'form-select' : 'form-input');
+});
+</script>

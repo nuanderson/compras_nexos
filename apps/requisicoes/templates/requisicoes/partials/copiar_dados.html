@@ -1,0 +1,21 @@
+{% comment %}
+Select para copiar dados de requisição anterior. (D-14, Padrão 7 do RESEARCH.md)
+
+Ao selecionar, HTMX faz GET para copiar-dados e preenche #campos-requisicao.
+{% endcomment %}
+<div class="form-group">
+  <label class="form-label">Copiar dados de requisição anterior (opcional)</label>
+  <select
+    hx-get="{% url 'requisicoes:copiar-dados' %}"
+    hx-trigger="change"
+    hx-target="#campos-requisicao"
+    hx-swap="innerHTML"
+    hx-include="[name='requisicao_origem']"
+    name="requisicao_origem"
+    class="form-select">
+    <option value="">— Nenhuma —</option>
+    {% for r in requisicoes_anteriores %}
+    <option value="{{ r.pk }}">{{ r.descricao|truncatechars:60 }} ({{ r.criado_em|date:"d/m/Y" }})</option>
+    {% endfor %}
+  </select>
+</div>

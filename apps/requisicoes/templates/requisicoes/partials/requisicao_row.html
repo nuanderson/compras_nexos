@@ -1,0 +1,22 @@
+<tr id="requisicao-row-{{ requisicao.pk }}">
+  <td>{{ requisicao.descricao|truncatechars:60 }}</td>
+  <td>{{ requisicao.categoria.nome }}</td>
+  <td>R$ {{ requisicao.valor_estimado|floatformat:2 }}</td>
+  <td>{% include "requisicoes/partials/status_badge.html" %}</td>
+  <td>{{ requisicao.criado_em|date:"d/m/Y" }}</td>
+  <td>
+    <a href="{% url 'requisicoes:detalhe' requisicao.pk %}" class="action-link" style="color:var(--color-accent);text-decoration:none;font-size:14px;">Ver</a>
+    {% if requisicao.status == 'RASCUNHO' %}
+    &middot; <a href="{% url 'requisicoes:editar' requisicao.pk %}" class="action-link" style="color:var(--color-accent);text-decoration:none;font-size:14px;">Editar</a>
+    {% endif %}
+    {% if requisicao.status == 'RASCUNHO' or requisicao.status == 'PENDENTE_GESTOR' %}
+    &middot; <button
+        hx-post="{% url 'requisicoes:cancelar' requisicao.pk %}"
+        hx-target="#requisicao-row-{{ requisicao.pk }}"
+        hx-swap="outerHTML"
+        class="btn btn-ghost"
+        style="color:var(--color-destructive);font-size:14px;height:auto;padding:0;"
+        onclick="return confirm('Confirmar cancelamento da requisição?')">Cancelar</button>
+    {% endif %}
+  </td>
+</tr>

@@ -30,8 +30,8 @@
         </a>
 
         <!-- Requisições — visible to all roles -->
-        <a href="#"
-           class="nav-item">
+        <a href="{% url 'requisicoes:lista' %}"
+           class="nav-item {% if 'requisicoes' in request.path %}is-active{% endif %}">
           Requisições
         </a>
 

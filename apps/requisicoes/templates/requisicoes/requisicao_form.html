@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block page_title %}{% if action == 'create' %}Nova Requisição{% else %}Editar Requisição{% endif %}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:720px;">
+  {% comment %}Copiar dados de requisição anterior (D-14){% endcomment %}
+  {% if action == 'create' %}
+  {% include "requisicoes/partials/copiar_dados.html" %}
+  {% endif %}
+
+  <div id="form-container">
+    <div id="campos-requisicao">
+      {% include "requisicoes/partials/campos_requisicao.html" %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% comment %}
+Badge de status da Requisicao.
+
+Na tela de detalhe: envolvido em hx-get para polling de 15s (REQ-02).
+Na listagem: sem polling (apenas o badge estático).
+{% endcomment %}
+{% if requisicao.status == 'RASCUNHO' %}
+  <span class="badge badge-rascunho">Rascunho</span>
+{% elif requisicao.status == 'PENDENTE_GESTOR' %}
+  <span class="badge badge-aguardando">Aguardando Gestor</span>
+{% elif requisicao.status == 'PENDENTE_DIRETOR' %}
+  <span class="badge badge-em-cotacao">Aguardando Diretor</span>
+{% elif requisicao.status == 'APROVADO' %}
+  <span class="badge badge-ativo">Aprovado</span>
+{% elif requisicao.status == 'REPROVADO' %}
+  <span class="badge badge-inativo">Reprovado</span>
+{% elif requisicao.status == 'CANCELADO' %}
+  <span class="badge badge-cancelado">Cancelado</span>
+{% endif %}
