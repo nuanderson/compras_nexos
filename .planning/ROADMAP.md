@@ -58,7 +58,12 @@ Plans:
   4. Every approval/rejection event is recorded with actor, timestamp, and reason — visible to the Solicitante on their requisition detail page
   5. Admin can configure approval thresholds by value via the admin panel without a code deployment
 
-**Plans:** TBD
+**Plans:** 4 plans
+Plans:
+- [ ] 02-01-PLAN.md — Fundação de dados: 2 apps (requisicoes, aprovacoes), 4 modelos, Django admin, badges CSS, scaffold de testes
+- [ ] 02-02-PLAN.md — Slice do Solicitante + camada de serviço completa (FSM): criar/listar/detalhar/enviar/cancelar/copiar dados
+- [ ] 02-03-PLAN.md — Slice do Gestor: fila por unidade, aprovar/reprovar via modal HTMX, e-mail transacional aos Gestores
+- [ ] 02-04-PLAN.md — Slice do Diretor: fila 2º nível (todas as unidades), aprovar/reprovar, reprovação permanente
 **UI hint:** yes
 
 ---
@@ -123,7 +128,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
-| 2. Requisitions & Approvals | 0/? | Not started | - |
+| 2. Requisitions & Approvals | 0/4 | Planned     | - |
 | 3. Suppliers & Inventory | 0/? | Not started | - |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
@@ -179,4 +184,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-06-10*
-*Last updated: 2026-06-10 — Phase 1 decomposed into 3 plans*
+*Last updated: 2026-06-10 — Phase 2 decomposed into 4 plans*
