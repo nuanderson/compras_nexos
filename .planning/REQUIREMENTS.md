@@ -7,18 +7,18 @@
 
 ### Autenticação e Perfis
 
-- [ ] **AUTH-01**: Usuário faz login com e-mail e senha
-- [ ] **AUTH-02**: Usuário recupera senha via link por e-mail
-- [ ] **AUTH-03**: Sessão permanece ativa entre atualizações do navegador
-- [ ] **AUTH-04**: Admin cria, edita e desativa contas de usuários
-- [ ] **AUTH-05**: Sistema suporta 5 perfis: Solicitante, Gestor, Comprador, Diretor, Admin
-- [ ] **AUTH-06**: Cada usuário está vinculado a uma unidade padrão
+- [x] **AUTH-01**: Usuário faz login com e-mail e senha
+- [x] **AUTH-02**: Usuário recupera senha via link por e-mail
+- [x] **AUTH-03**: Sessão permanece ativa entre atualizações do navegador
+- [x] **AUTH-04**: Admin cria, edita e desativa contas de usuários
+- [x] **AUTH-05**: Sistema suporta 5 perfis: Solicitante, Gestor, Comprador, Diretor, Admin
+- [x] **AUTH-06**: Cada usuário está vinculado a uma unidade padrão
 
 ### Unidades
 
-- [ ] **UNIT-01**: Admin cadastra unidades (nome, descrição, status ativo/inativo)
-- [ ] **UNIT-02**: Admin vincula usuários a unidades
-- [ ] **UNIT-03**: Usuário tem unidade padrão pré-selecionada ao abrir requisição, mas pode alterá-la
+- [x] **UNIT-01**: Admin cadastra unidades (nome, descrição, status ativo/inativo)
+- [x] **UNIT-02**: Admin vincula usuários a unidades
+- [x] **UNIT-03**: Usuário tem unidade padrão pré-selecionada ao abrir requisição, mas pode alterá-la
 - [ ] **UNIT-04**: Relatórios podem ser filtrados por unidade
 
 ### Requisições de Compra
@@ -164,6 +164,7 @@ Mapeamento atualizado após criação do roadmap — 2026-06-10.
 | UNIT-04 | Phase 5 | Reports & Dashboard | Pending |
 
 **Coverage:**
+
 - v1 requirements: 39 total
 - Mapped to phases: 39
 - Unmapped: 0

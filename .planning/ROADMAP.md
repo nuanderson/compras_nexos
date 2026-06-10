@@ -122,7 +122,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/3 | Complete   | 2026-06-10 |
+| 1. Foundation | 3/3 | Complete    | 2026-06-10 |
 | 2. Requisitions & Approvals | 0/? | Not started | - |
 | 3. Suppliers & Inventory | 0/? | Not started | - |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
