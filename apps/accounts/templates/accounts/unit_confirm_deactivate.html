@@ -1,0 +1,9 @@
+<div class="card" style="margin-bottom:16px;border-color:var(--color-destructive);">
+  <p style="font-size:14px;margin-bottom:16px;">
+    <strong>Desativar unidade:</strong> Usuários vinculados não serão desvinculados automaticamente. Deseja continuar?
+  </p>
+  <div style="display:flex;gap:8px;">
+    <button hx-post="{% url 'accounts:unit-deactivate' unit.pk %}" hx-target="#unit-row-{{ unit.pk }}" hx-swap="outerHTML" class="btn btn-destructive">Confirmar desativação</button>
+    <button hx-get="" hx-target="#confirm-container" hx-swap="innerHTML" class="btn btn-secondary">Cancelar</button>
+  </div>
+</div>

@@ -61,7 +61,7 @@
 
         <!-- Admin / Config — admin only -->
         {% if request.user.role == 'admin' %}
-        <a href="#"
+        <a href="{% url 'accounts:user-list' %}"
            class="nav-item {% if 'admin-panel' in request.path %}is-active{% endif %}">
           Admin / Config
         </a>

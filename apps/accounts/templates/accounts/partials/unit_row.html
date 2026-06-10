@@ -1,0 +1,18 @@
+<tr id="unit-row-{{ unit.pk }}" {% if not unit.ativo %}style="opacity:0.5"{% endif %}>
+  <td>{{ unit.nome }}</td>
+  <td>{{ unit.descricao|default:"—" }}</td>
+  <td>
+    <span class="badge {% if unit.ativo %}badge-ativo{% else %}badge-inativo{% endif %}">
+      {% if unit.ativo %}Ativo{% else %}Inativo{% endif %}
+    </span>
+  </td>
+  <td>{{ unit.user_count }}</td>
+  <td>
+    <a href="{% url 'accounts:unit-edit' unit.pk %}" class="action-link" style="color:var(--color-accent);text-decoration:none;font-size:14px;">Editar</a>
+    {% if unit.ativo %}
+    &middot; <button hx-get="{% url 'accounts:unit-deactivate-confirm' unit.pk %}" hx-target="#confirm-container" hx-swap="innerHTML" class="btn btn-ghost" style="color:var(--color-destructive);font-size:14px;height:auto;padding:0;">Desativar</button>
+    {% else %}
+    &middot; <span style="color:var(--color-text-muted);font-size:14px;">Inativo</span>
+    {% endif %}
+  </td>
+</tr>

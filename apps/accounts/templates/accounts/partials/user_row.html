@@ -1,0 +1,23 @@
+<tr id="user-row-{{ user.pk }}" {% if not user.is_active %}style="opacity:0.5"{% endif %}>
+  <td>{{ user.get_full_name|default:user.username }}</td>
+  <td>{{ user.email }}</td>
+  <td>
+    <span class="badge {% if user.role == 'admin' %}badge-admin{% elif user.is_active %}badge-ativo{% else %}badge-inativo{% endif %}">
+      {{ user.get_role_display }}
+    </span>
+  </td>
+  <td>{{ user.default_unit.nome|default:"—" }}</td>
+  <td>
+    <span class="badge {% if user.is_active %}badge-ativo{% else %}badge-inativo{% endif %}">
+      {% if user.is_active %}Ativo{% else %}Inativo{% endif %}
+    </span>
+  </td>
+  <td>
+    <a href="{% url 'accounts:user-edit' user.pk %}" class="action-link" style="color:var(--color-accent);text-decoration:none;font-size:14px;">Editar</a>
+    {% if user.is_active %}
+    &middot; <button hx-get="{% url 'accounts:user-deactivate-confirm' user.pk %}" hx-target="#confirm-container" hx-swap="innerHTML" class="btn btn-ghost" style="color:var(--color-destructive);font-size:14px;height:auto;padding:0;">Desativar</button>
+    {% else %}
+    &middot; <span style="color:var(--color-text-muted);font-size:14px;">Inativo</span>
+    {% endif %}
+  </td>
+</tr>

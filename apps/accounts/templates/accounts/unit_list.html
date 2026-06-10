@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block page_title %}Unidades{% endblock %}
+{% block page_actions %}<a href="{% url 'accounts:unit-create' %}" class="btn btn-primary">Criar unidade</a>{% endblock %}
+{% block content %}
+  <div id="confirm-container"></div>
+  {% if units %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Usuários vinculados</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for unit in units %}
+            {% include "accounts/partials/unit_row.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="text-align:center">
+      <p style="font-size:20px;font-weight:600;">Nenhuma unidade cadastrada</p>
+      <p class="text-muted">Cadastre a primeira unidade organizacional para vincular usuários a ela.</p>
+    </div>
+  {% endif %}
+{% endblock %}

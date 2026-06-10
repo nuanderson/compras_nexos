@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block page_title %}Usuários{% endblock %}
+{% block page_actions %}<a href="{% url 'accounts:user-create' %}" class="btn btn-primary">Criar usuário</a>{% endblock %}
+{% block content %}
+  <div id="confirm-container"></div>
+  {% if users %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Perfil</th>
+            <th>Unidade</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            {% include "accounts/partials/user_row.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="text-align:center">
+      <p style="font-size:20px;font-weight:600;">Nenhum usuário cadastrado</p>
+      <p class="text-muted">Crie o primeiro usuário pelo botão acima para começar.</p>
+    </div>
+  {% endif %}
+{% endblock %}
