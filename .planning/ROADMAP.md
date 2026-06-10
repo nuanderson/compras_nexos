@@ -58,14 +58,14 @@ Plans:
   4. Every approval/rejection event is recorded with actor, timestamp, and reason — visible to the Solicitante on their requisition detail page
   5. Admin can configure approval thresholds by value via the admin panel without a code deployment
 
-**Plans:** 1/4 plans executed
+**Plans:** 2/4 plans executed
 **Wave 1**
 
 - [x] 02-01-PLAN.md — Fundação de dados: 2 apps (requisicoes, aprovacoes), 4 modelos, Django admin, badges CSS, scaffold de testes
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 02-02-PLAN.md — Slice do Solicitante + camada de serviço completa (FSM): criar/listar/detalhar/enviar/cancelar/copiar dados
+- [x] 02-02-PLAN.md — Slice do Solicitante + camada de serviço completa (FSM): criar/listar/detalhar/enviar/cancelar/copiar dados
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -139,7 +139,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
-| 2. Requisitions & Approvals | 1/4 | In Progress|  |
+| 2. Requisitions & Approvals | 2/4 | In Progress|  |
 | 3. Suppliers & Inventory | 0/? | Not started | - |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
