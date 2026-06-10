@@ -30,7 +30,11 @@
   3. Admin can create, edit, and deactivate user accounts via the admin panel
   4. Admin can assign one of five roles (Solicitante, Gestor, Comprador, Diretor, Admin) to each user
   5. Admin can create organizational units and link users to them; each user has a default unit pre-selected when opening a requisition
-**Plans:** TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 01-01-PLAN.md — Walking Skeleton: Docker + project scaffold + custom User model + migrations + login page + CSS design system
+- [ ] 01-02-PLAN.md — Password reset templates + full test scaffold (conftest, test_auth, test_models)
+- [ ] 01-03-PLAN.md — Admin panel: user CRUD + unit CRUD with HTMX inline confirmation + admin tests
 **UI hint:** yes
 
 ---
@@ -101,7 +105,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/? | Not started | - |
+| 1. Foundation | 0/3 | In progress | - |
 | 2. Requisitions & Approvals | 0/? | Not started | - |
 | 3. Suppliers & Inventory | 0/? | Not started | - |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
@@ -158,4 +162,4 @@
 ---
 
 *Roadmap created: 2026-06-10*
-*Last updated: 2026-06-10 after initial creation*
+*Last updated: 2026-06-10 — Phase 1 decomposed into 3 plans*

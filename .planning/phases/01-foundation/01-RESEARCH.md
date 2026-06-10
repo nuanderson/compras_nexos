@@ -772,22 +772,25 @@ The UI-SPEC is a binding contract for Phase 1 implementation. Key implementation
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Single `default_unit` FK vs multi-unit membership (ManyToManyField)**
    - What we know: UNIT-02 says "Admin vincula usuários a unidades" and UNIT-03 says "usuário tem unidade padrão." AUTH-06 says "cada usuário está vinculado a uma unidade padrão."
    - What's unclear: Can a user belong to multiple units (e.g., a Comprador covering 3 units) while having one default? Or is it strictly one user = one unit?
    - Recommendation: Implement `default_unit = ForeignKey(UnidadeOrganizacional, null=True)` on User for Phase 1. Do NOT add ManyToManyField without explicit client requirement — it complicates filtering in every downstream query. Phase 2+ can add M2M if the business need is confirmed.
+   - **RESOLVED:** Use `default_unit = ForeignKey(UnidadeOrganizacional, null=True, blank=True, on_delete=SET_NULL)` only. No ManyToManyField in Phase 1. Decision: single FK is sufficient for all Phase 1 requirements (AUTH-06, UNIT-02, UNIT-03). M2M deferred to Phase 2+ pending confirmed business need.
 
 2. **Django admin site (`/admin/`) alongside custom admin panel (`/admin-panel/`)**
    - What we know: The custom admin panel is the user-facing interface. Django's `/admin/` can be retained for developer/superuser use.
    - What's unclear: Should `/admin/` be disabled in production or kept?
    - Recommendation: Keep `/admin/` enabled but accessible only to `is_superuser=True` users (Django default). Document this in `.env.example`. Do not remove it — it's valuable for debugging.
+   - **RESOLVED:** Keep `/admin/` enabled. Access restricted to `is_superuser=True` by Django default. No configuration change needed. Document in `.env.example` that superuser is created via `manage.py createsuperuser` inside Docker.
 
 3. **Password reset email backend in Phase 1**
    - What we know: AUTH-02 requires password reset via email. SES + DKIM setup is listed as a Phase 2 blocker in STATE.md.
    - What's unclear: Should Phase 1 complete AUTH-02 end-to-end with real email, or deliver the flow with console backend only?
    - Recommendation: Implement the full Django password reset flow. In dev, use `console` backend (email prints to stdout). In prod, the `django-anymail` SES backend is configured via env vars. The code is complete — SES domain verification is an operations task, not a code task. Do not block Phase 1 completion on SES DNS records.
+   - **RESOLVED:** Phase 1 delivers the full password reset code flow using `console` backend in dev (`EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'`). Production SES wiring via `django-anymail` is configured via env vars but not tested until SES domain verification is complete (operations task, not a code blocker for Phase 1 acceptance).
 
 ---
 
