@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     # Local apps
     "apps.core",
     "apps.accounts",
+    "apps.requisicoes",
+    "apps.aprovacoes",
 ]
 
 MIDDLEWARE = [
