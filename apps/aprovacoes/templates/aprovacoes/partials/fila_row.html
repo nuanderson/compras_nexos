@@ -1,0 +1,25 @@
+<tr id="fila-row-{{ req.pk }}">
+  <td>{{ req.criado_por.get_full_name|default:req.criado_por.email }}</td>
+  <td>{{ req.unidade.nome }}</td>
+  <td>{{ req.descricao }}</td>
+  <td>{{ req.categoria.nome|default:"—" }}</td>
+  <td>R$ {{ req.valor_estimado|floatformat:2 }}</td>
+  <td>{{ req.criado_em|date:"d/m/Y" }}</td>
+  <td>
+    <button
+      hx-post="{% url 'aprovacoes:aprovar-gestor' req.pk %}"
+      hx-target="#fila-row-{{ req.pk }}"
+      hx-swap="outerHTML"
+      class="btn btn-primary btn-sm"
+      style="margin-right:4px;">
+      Aprovar
+    </button>
+    <button
+      hx-get="{% url 'aprovacoes:modal-reprovar-gestor' req.pk %}"
+      hx-target="#modal-container"
+      hx-swap="innerHTML"
+      class="btn btn-destructive btn-sm">
+      Reprovar
+    </button>
+  </td>
+</tr>

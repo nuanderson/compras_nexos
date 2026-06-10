@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_title %}Fila de Aprovacao — Gestor{% endblock %}
+{% block content %}
+  <div id="modal-container"></div>
+
+  {% if requisicoes %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Solicitante</th>
+            <th>Unidade</th>
+            <th>Descricao</th>
+            <th>Categoria</th>
+            <th>Valor Estimado</th>
+            <th>Data</th>
+            <th>Acoes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in requisicoes %}
+            {% include "aprovacoes/partials/fila_row.html" with req=r %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="text-align:center">
+      <p style="font-size:20px;font-weight:600;">Nenhuma requisicao aguardando seu parecer.</p>
+      <p class="text-muted">Quando uma requisicao for submetida para sua unidade, ela aparecera aqui.</p>
+    </div>
+  {% endif %}
+{% endblock %}

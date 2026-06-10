@@ -7,7 +7,7 @@ Cobre todas as transições de estado da máquina de estados:
   - aprovar_diretor (PENDENTE_DIRETOR → APROVADO)
   - reprovar_requisicao (PENDENTE_GESTOR/PENDENTE_DIRETOR → REPROVADO)
   - cancelar_requisicao (RASCUNHO/PENDENTE_GESTOR → CANCELADO)
-  - _notificar_gestores (stub documentado com logger.warning)
+  - _notificar_gestores (implementacao real com send_mail, cobertura completa em test_email.py)
 """
 import logging
 from decimal import Decimal
@@ -231,17 +231,10 @@ class TestLogCriadoEmCadaTransicao:
 
 @pytest.mark.django_db
 class TestNotificarGestoresStub:
-    def test_notificar_gestores_stub_emite_warning(self, caplog):
+    def test_notificar_gestores_pk_inexistente_nao_levanta_excecao(self):
         """
-        Chamar _notificar_gestores emite logger.warning visível com texto "STUB" / Plano 03
-        e NÃO levanta exceção. (REQ-04, falha visível)
+        Chamar _notificar_gestores com pk inexistente NAO levanta excecao (falha silenciosa D-07).
+        A implementacao real retorna silenciosamente quando Requisicao.DoesNotExist.
         """
-        # _notificar_gestores usa um pk fictício — não deve causar exceção
-        with caplog.at_level(logging.WARNING, logger="apps.aprovacoes.services"):
-            services._notificar_gestores(99999)  # pk inexistente — não importa
-
-        assert len(caplog.records) >= 1
-        warning_texts = [r.message for r in caplog.records if r.levelno == logging.WARNING]
-        assert any("STUB" in t or "Plano 03" in t or "03" in t for t in warning_texts), (
-            f"Nenhum WARNING com texto de stub encontrado. Records: {caplog.records}"
-        )
+        # Nao deve levantar nenhuma excecao — comportamento de falha silenciosa
+        services._notificar_gestores(99999)  # pk inexistente
