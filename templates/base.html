@@ -1,0 +1,100 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block title %}ComprasNexos{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script src="{% static 'htmx/htmx.min.js' %}"></script>
+</head>
+<body>
+  <script>
+    document.body.addEventListener('htmx:configRequest', function(evt) {
+      evt.detail.headers['X-CSRFToken'] = document.querySelector(
+        'meta[name="csrf-token"]'
+      ).content;
+    });
+  </script>
+
+  <div class="layout">
+    <!-- Sidebar navigation -->
+    <nav class="sidebar" hx-boost="true">
+      <div class="sidebar-brand">ComprasNexos</div>
+
+      <div class="sidebar-nav">
+        <!-- Dashboard — visible to all roles -->
+        <a href="{% url 'core:dashboard' %}"
+           class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}is-active{% endif %}">
+          Dashboard
+        </a>
+
+        <!-- Requisições — visible to all roles -->
+        <a href="#"
+           class="nav-item">
+          Requisições
+        </a>
+
+        <!-- Cotações — comprador + admin only -->
+        {% if request.user.role == 'comprador' or request.user.role == 'admin' %}
+        <a href="#"
+           class="nav-item">
+          Cotações
+        </a>
+        {% endif %}
+
+        <!-- Fornecedores — comprador + admin only -->
+        {% if request.user.role == 'comprador' or request.user.role == 'admin' %}
+        <a href="#"
+           class="nav-item">
+          Fornecedores
+        </a>
+        {% endif %}
+
+        <!-- Relatórios — comprador + diretor + admin -->
+        {% if request.user.role == 'comprador' or request.user.role == 'diretor' or request.user.role == 'admin' %}
+        <a href="#"
+           class="nav-item">
+          Relatórios
+        </a>
+        {% endif %}
+
+        <!-- Admin / Config — admin only -->
+        {% if request.user.role == 'admin' %}
+        <a href="#"
+           class="nav-item {% if 'admin-panel' in request.path %}is-active{% endif %}">
+          Admin / Config
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          {% if request.user.get_full_name %}{{ request.user.get_full_name }}{% else %}{{ request.user.email }}{% endif %}
+        </div>
+        <a href="{% url 'accounts:logout' %}" class="nav-item" style="padding: 0;">Sair</a>
+      </div>
+    </nav>
+
+    <!-- Main content area -->
+    <div class="main">
+      <header class="topbar">
+        <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+        <div class="topbar-actions">{% block page_actions %}{% endblock %}</div>
+      </header>
+
+      <main class="content">
+        <!-- Django messages -->
+        {% for message in messages %}
+        <div class="banner {% if message.tags == 'success' %}banner-success{% elif message.tags == 'error' %}banner-error{% else %}banner-info{% endif %}">
+          <span>{{ message }}</span>
+          <button class="banner-close" onclick="this.parentElement.style.display='none'" aria-label="Fechar">&times;</button>
+        </div>
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+</html>
