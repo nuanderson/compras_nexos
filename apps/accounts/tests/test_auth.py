@@ -4,6 +4,7 @@ Covers: AUTH-01 (login), AUTH-02 (password reset), AUTH-03 (session).
 """
 import pytest
 from django.core import mail
+from django.test import override_settings
 from django.urls import reverse
 
 from apps.accounts.models import User
@@ -49,6 +50,7 @@ def test_login_inactive_user(client, db):
 
 
 @pytest.mark.django_db
+@override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
 def test_password_reset_sends_email(client, admin_user):
     response = client.post(
         reverse("accounts:password-reset"),
