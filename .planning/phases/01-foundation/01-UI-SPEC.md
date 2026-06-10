@@ -81,7 +81,7 @@ Declared values (all multiples of 4):
 | Body | 14px | 400 (regular) | 1.5 | Form labels, table cells, descriptive text |
 | Label | 12px | 600 (semibold) | 1.4 | Status badges, table column headers, form field labels |
 | Heading | 20px | 600 (semibold) | 1.2 | Page titles in top bar, card section headings |
-| Display | 28px | 700 (bold) | 1.1 | KPI numbers on dashboard widgets (Phase 5, but token declared now) |
+| Display | 28px | 600 (semibold) | 1.1 | KPI numbers on dashboard widgets (Phase 5, but token declared now) |
 
 **Font stack (declared once in `:root`):**
 ```css
@@ -122,7 +122,7 @@ All colors declared as CSS custom properties in `:root`. Dark theme is the only 
 | Admin | `#4c1d95` bg / `#c4b5fd` text | violet | `.badge-admin` |
 
 **Accent reserved for:**
-- Primary CTA button fill (e.g., "Entrar", "Salvar", "Criar Usuário")
+- Primary CTA button fill (e.g., "Entrar na conta", "Salvar", "Criar Usuário")
 - Active navigation item left-border indicator (3px left border)
 - Focus ring on form inputs (`outline: 2px solid var(--color-accent)`)
 
@@ -144,7 +144,7 @@ All colors declared as CSS custom properties in `:root`. Dark theme is the only 
 3. Email field: label "E-mail" + `<input type="email">`, full width
 4. Password field: label "Senha" + `<input type="password">`, full width, margin-top 16px
 5. Forgot password link: "Esqueceu a senha?" — 12px, right-aligned, color: accent, margin-top 8px
-6. Submit button: "Entrar" — full width, accent fill, 44px height, margin-top 24px
+6. Submit button: "Entrar na conta" — full width, accent fill, 44px height, margin-top 24px
 7. Error banner (conditional): red border card above form fields when credentials fail
 
 **Input style:** `width: 100%; height: 44px; padding: 0 16px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 6px; color: var(--color-text); font-size: 14px`. Focus: `outline: 2px solid var(--color-accent); outline-offset: 2px`.
@@ -222,7 +222,7 @@ All colors declared as CSS custom properties in `:root`. Dark theme is the only 
 
 **Card heading:** 12px/semibold/muted, uppercase, margin-bottom 8px.
 
-**Card value:** 28px/bold (display role), color: var(--color-text).
+**Card value:** 28px/semibold (display role), color: var(--color-text).
 
 **Card grid:** CSS Grid, `grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px`.
 
@@ -255,7 +255,7 @@ All colors declared as CSS custom properties in `:root`. Dark theme is the only 
 
 **Form container:** Card layout (surface bg, border, 8px radius), `max-width: 640px`, `padding: 32px`.
 
-**Field group:** `display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px`.
+**Field group:** `display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px`.
 
 **Label:** `font-size: 12px; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em`.
 
@@ -308,7 +308,7 @@ All copy in Brazilian Portuguese (pt-BR). Formal register (você, not tu).
 
 | Element | Copy |
 |---------|------|
-| Login CTA | "Entrar" |
+| Login CTA | "Entrar na conta" |
 | Password reset request CTA | "Enviar link de redefinição" |
 | Password reset confirm CTA | "Redefinir senha" |
 | Create user CTA | "Criar usuário" |
@@ -329,7 +329,8 @@ All copy in Brazilian Portuguese (pt-BR). Formal register (você, not tu).
 | Deactivate unit — confirmation | "Desativar unidade: Usuários vinculados não serão desvinculados automaticamente. Deseja continuar?" |
 | Deactivate button label | "Desativar" |
 | Reactivate button label | "Reativar" |
-| Cancel button label | "Cancelar" |
+| Cancel button label (forms) | "Cancelar edição" |
+| Cancel button label (confirmation dialogs) | "Cancelar" |
 
 **Destructive confirmation approach:** Inline confirmation prompt rendered via HTMX partial swap — clicking "Desativar" loads a confirmation card into the page (no browser `window.confirm()`). Confirmation card has two buttons: "Confirmar desativação" (destructive variant) and "Cancelar" (secondary variant).
 
