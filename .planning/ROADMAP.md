@@ -58,12 +58,23 @@ Plans:
   4. Every approval/rejection event is recorded with actor, timestamp, and reason — visible to the Solicitante on their requisition detail page
   5. Admin can configure approval thresholds by value via the admin panel without a code deployment
 
-**Plans:** 4 plans
-Plans:
+**Plans:** 4 plansPlans:
+**Wave 1**
+
 - [ ] 02-01-PLAN.md — Fundação de dados: 2 apps (requisicoes, aprovacoes), 4 modelos, Django admin, badges CSS, scaffold de testes
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 02-02-PLAN.md — Slice do Solicitante + camada de serviço completa (FSM): criar/listar/detalhar/enviar/cancelar/copiar dados
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 02-03-PLAN.md — Slice do Gestor: fila por unidade, aprovar/reprovar via modal HTMX, e-mail transacional aos Gestores
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
 - [ ] 02-04-PLAN.md — Slice do Diretor: fila 2º nível (todas as unidades), aprovar/reprovar, reprovação permanente
+
 **UI hint:** yes
 
 ---
