@@ -119,55 +119,55 @@
 
 ## Traceability
 
-Mapeamento populado durante criação do roadmap.
+Mapeamento atualizado após criação do roadmap — 2026-06-10.
 
-| Requisito | Fase | Status |
-|-----------|------|--------|
-| AUTH-01 | Fase 1 | Pending |
-| AUTH-02 | Fase 1 | Pending |
-| AUTH-03 | Fase 1 | Pending |
-| AUTH-04 | Fase 1 | Pending |
-| AUTH-05 | Fase 1 | Pending |
-| AUTH-06 | Fase 1 | Pending |
-| UNIT-01 | Fase 1 | Pending |
-| UNIT-02 | Fase 1 | Pending |
-| UNIT-03 | Fase 1 | Pending |
-| UNIT-04 | Fase 5 | Pending |
-| REQ-01 | Fase 2 | Pending |
-| REQ-02 | Fase 2 | Pending |
-| REQ-03 | Fase 2 | Pending |
-| REQ-04 | Fase 2 | Pending |
-| APROV-01 | Fase 2 | Pending |
-| APROV-02 | Fase 2 | Pending |
-| APROV-03 | Fase 2 | Pending |
-| APROV-04 | Fase 2 | Pending |
-| APROV-05 | Fase 2 | Pending |
-| APROV-06 | Fase 2 | Pending |
-| FORN-01 | Fase 3 | Pending |
-| FORN-02 | Fase 3 | Pending |
-| FORN-03 | Fase 3 | Pending |
-| FORN-04 | Fase 3 | Pending |
-| FORN-05 | Fase 3 | Pending |
-| COT-01 | Fase 4 | Pending |
-| COT-02 | Fase 4 | Pending |
-| COT-03 | Fase 4 | Pending |
-| COT-04 | Fase 4 | Pending |
-| EST-01 | Fase 3 | Pending |
-| EST-02 | Fase 3 | Pending |
-| EST-03 | Fase 3 | Pending |
-| EST-04 | Fase 3 | Pending |
-| EST-05 | Fase 3 | Pending |
-| EST-06 | Fase 3 | Pending |
-| REL-01 | Fase 5 | Pending |
-| REL-02 | Fase 5 | Pending |
-| REL-03 | Fase 5 | Pending |
-| REL-04 | Fase 5 | Pending |
+| Requisito | Fase | Nome da Fase | Status |
+|-----------|------|--------------|--------|
+| AUTH-01 | Phase 1 | Foundation | Pending |
+| AUTH-02 | Phase 1 | Foundation | Pending |
+| AUTH-03 | Phase 1 | Foundation | Pending |
+| AUTH-04 | Phase 1 | Foundation | Pending |
+| AUTH-05 | Phase 1 | Foundation | Pending |
+| AUTH-06 | Phase 1 | Foundation | Pending |
+| UNIT-01 | Phase 1 | Foundation | Pending |
+| UNIT-02 | Phase 1 | Foundation | Pending |
+| UNIT-03 | Phase 1 | Foundation | Pending |
+| REQ-01 | Phase 2 | Requisitions & Approvals | Pending |
+| REQ-02 | Phase 2 | Requisitions & Approvals | Pending |
+| REQ-03 | Phase 2 | Requisitions & Approvals | Pending |
+| REQ-04 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-01 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-02 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-03 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-04 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-05 | Phase 2 | Requisitions & Approvals | Pending |
+| APROV-06 | Phase 2 | Requisitions & Approvals | Pending |
+| FORN-01 | Phase 3 | Suppliers & Inventory | Pending |
+| FORN-02 | Phase 3 | Suppliers & Inventory | Pending |
+| FORN-03 | Phase 3 | Suppliers & Inventory | Pending |
+| FORN-04 | Phase 3 | Suppliers & Inventory | Pending |
+| FORN-05 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-01 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-02 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-03 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-04 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-05 | Phase 3 | Suppliers & Inventory | Pending |
+| EST-06 | Phase 3 | Suppliers & Inventory | Pending |
+| COT-01 | Phase 4 | Quotations (RFQ) | Pending |
+| COT-02 | Phase 4 | Quotations (RFQ) | Pending |
+| COT-03 | Phase 4 | Quotations (RFQ) | Pending |
+| COT-04 | Phase 4 | Quotations (RFQ) | Pending |
+| REL-01 | Phase 5 | Reports & Dashboard | Pending |
+| REL-02 | Phase 5 | Reports & Dashboard | Pending |
+| REL-03 | Phase 5 | Reports & Dashboard | Pending |
+| REL-04 | Phase 5 | Reports & Dashboard | Pending |
+| UNIT-04 | Phase 5 | Reports & Dashboard | Pending |
 
 **Coverage:**
-- v1 requirements: 40 total
-- Mapped to phases: 40
-- Unmapped: 0 ✓
+- v1 requirements: 39 total
+- Mapped to phases: 39
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-06-10*
-*Last updated: 2026-06-10 after initial definition*
+*Last updated: 2026-06-10 after roadmap creation — traceability finalized*
