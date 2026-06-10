@@ -404,6 +404,16 @@ tr:hover td {
   color: #c4b5fd;
 }
 
+.badge-rascunho {
+  background: #374151;
+  color: #9ca3af;
+}
+
+.badge-cancelado {
+  background: #374151;
+  color: #9ca3af;
+}
+
 /* Banners / Notifications */
 .banner {
   padding: 12px 16px;
