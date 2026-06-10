@@ -1,0 +1,19 @@
+<form hx-post="{% if action == 'create' %}{% url 'accounts:user-create' %}{% else %}{% url 'accounts:user-edit' target_user.pk %}{% endif %}" hx-target="#form-container" hx-swap="innerHTML">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+      {{ field }}
+      {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% if action == 'create' %}Criar usuário{% else %}Salvar alterações{% endif %}</button>
+    <a href="{% url 'accounts:user-list' %}" class="btn btn-secondary">Cancelar edição</a>
+  </div>
+</form>
+<script>
+document.querySelectorAll('#form-container input, #form-container select, #form-container textarea').forEach(function(el) {
+  el.classList.add(el.tagName.toLowerCase() === 'select' ? 'form-select' : 'form-input');
+});
+</script>

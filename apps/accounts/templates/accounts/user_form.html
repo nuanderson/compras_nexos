@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block page_title %}{% if action == "create" %}Criar Usuário{% else %}Editar Usuário{% endif %}{% endblock %}
+{% block content %}
+  <div class="card" style="max-width:640px;">
+    <div id="form-container">
+      {% include "accounts/partials/user_form.html" %}
+    </div>
+  </div>
+{% endblock %}

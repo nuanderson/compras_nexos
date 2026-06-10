@@ -1,0 +1,9 @@
+<div class="card" style="margin-bottom:16px;border-color:var(--color-destructive);">
+  <p style="font-size:14px;margin-bottom:16px;">
+    <strong>Desativar usuário:</strong> Esta ação tornará a conta inacessível. O histórico será preservado. Deseja continuar?
+  </p>
+  <div style="display:flex;gap:8px;">
+    <button hx-post="{% url 'accounts:user-deactivate' target_user.pk %}" hx-target="#user-row-{{ target_user.pk }}" hx-swap="outerHTML" class="btn btn-destructive">Confirmar desativação</button>
+    <button hx-get="" hx-target="#confirm-container" hx-swap="innerHTML" class="btn btn-secondary">Cancelar</button>
+  </div>
+</div>
