@@ -60,9 +60,9 @@
         {% endif %}
 
         <!-- Fornecedores — comprador + admin only -->
-        {% if request.user.role == 'comprador' or request.user.role == 'admin' %}
-        <a href="#"
-           class="nav-item">
+        {% if request.user.role == 'comprador' or request.user.role == 'admin' or request.user.is_superuser %}
+        <a href="{% url 'fornecedores:lista' %}"
+           class="nav-item {% if 'fornecedores' in request.path %}is-active{% endif %}">
           Fornecedores
         </a>
         {% endif %}

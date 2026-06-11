@@ -1,0 +1,21 @@
+{% load fornecedor_tags %}
+{% if fornecedores %}
+<table class="table" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="border-bottom: 1px solid #2a2a4a;">
+      <th style="padding: 0.75rem; text-align: left; color: #aaa; font-weight: 500;">Razão Social</th>
+      <th style="padding: 0.75rem; text-align: left; color: #aaa; font-weight: 500;">CNPJ</th>
+      <th style="padding: 0.75rem; text-align: left; color: #aaa; font-weight: 500;">Categoria</th>
+      <th style="padding: 0.75rem; text-align: left; color: #aaa; font-weight: 500;">Status</th>
+      <th style="padding: 0.75rem; text-align: left; color: #aaa; font-weight: 500;">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in fornecedores %}
+      {% include "fornecedores/partials/fornecedor_row.html" with fornecedor=f %}
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color: #aaa; padding: 1rem 0;">Nenhum fornecedor encontrado.</p>
+{% endif %}
