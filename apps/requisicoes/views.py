@@ -297,11 +297,17 @@ class CopiarDadosView(SolicitanteRequiredMixin, View):
     """
 
     def get(self, request):
+        from django.http import HttpResponseBadRequest
         origem_pk = request.GET.get("requisicao_origem")
         if origem_pk:
+            # WR-05: validar origem_pk como inteiro antes de passar ao ORM
+            try:
+                origem_pk_int = int(origem_pk)
+            except (ValueError, TypeError):
+                return HttpResponseBadRequest("origem_pk inválido")
             # Verificar ownership: Solicitante só pode copiar suas próprias (T-02-04)
             origem = get_object_or_404(
-                Requisicao, pk=origem_pk, criado_por=request.user
+                Requisicao, pk=origem_pk_int, criado_por=request.user
             )
             # Inicializar form com dados da origem
             initial_data = {
