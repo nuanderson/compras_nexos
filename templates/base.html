@@ -35,11 +35,19 @@
           Requisições
         </a>
 
-        <!-- Aprovações — gestor + admin -->
+        <!-- Aprovações (Gestor) — gestor + admin + superuser -->
         {% if request.user.role == 'gestor' or request.user.role == 'admin' or request.user.is_superuser %}
         <a href="{% url 'aprovacoes:fila-gestor' %}"
-           class="nav-item {% if 'aprovacoes' in request.path %}is-active{% endif %}">
+           class="nav-item {% if 'aprovacoes' in request.path and request.resolver_match.url_name != 'fila-diretor' %}is-active{% endif %}">
           Aprovações
+        </a>
+        {% endif %}
+
+        <!-- Aprovações (Diretoria) — diretor + admin -->
+        {% if request.user.role == 'diretor' or request.user.role == 'admin' %}
+        <a href="{% url 'aprovacoes:fila-diretor' %}"
+           class="nav-item {% if request.resolver_match.url_name == 'fila-diretor' %}is-active{% endif %}">
+          Aprovações (Diretoria)
         </a>
         {% endif %}
 
