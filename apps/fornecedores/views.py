@@ -41,7 +41,7 @@ class CompradorRequiredMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-def get_queryset_fornecedores(q=None, categoria_pk=None):
+def get_queryset_fornecedores(q=None, categoria_pk=None, apenas_ativos=True):
     """
     Retorna queryset de Fornecedor com busca fuzzy ou exata e filtro de categoria.
 
@@ -53,7 +53,9 @@ def get_queryset_fornecedores(q=None, categoria_pk=None):
     - q truncado a 100 chars (T-03-04 — DoS guard).
     - TrigramSimilarity nunca chamado com q vazio (Pitfall 2 do RESEARCH.md).
     """
-    qs = Fornecedor.objects.select_related("categoria").filter(ativo=True)
+    qs = Fornecedor.objects.select_related("categoria")
+    if apenas_ativos:
+        qs = qs.filter(ativo=True)
 
     if categoria_pk:
         qs = qs.filter(categoria_id=categoria_pk)
@@ -89,15 +91,18 @@ class ListaFornecedoresView(CompradorRequiredMixin, View):
     def get(self, request):
         q = request.GET.get("q", "").strip()
         categoria_pk = request.GET.get("categoria", "")
+        mostrar_inativos = request.GET.get("mostrar_inativos", "") == "1"
         qs = get_queryset_fornecedores(
             q=q or None,
             categoria_pk=categoria_pk or None,
+            apenas_ativos=not mostrar_inativos,
         )
         ctx = {
             "fornecedores": qs,
             "categorias": CategoriaCompra.objects.filter(ativo=True),
             "q": q,
             "categoria_pk": categoria_pk,
+            "mostrar_inativos": mostrar_inativos,
         }
         if request.htmx:
             return render(request, "fornecedores/partials/fornecedor_list.html", ctx)

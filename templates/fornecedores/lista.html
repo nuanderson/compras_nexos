@@ -30,7 +30,7 @@
         hx-trigger="input delay:300ms, search"
         hx-target="#fornecedores-list"
         hx-swap="innerHTML"
-        hx-include="[name='categoria']"
+        hx-include="[name='categoria'],[name='mostrar_inativos']"
         style="width: 100%; padding: 0.5rem 0.75rem; background: #16213e; border: 1px solid #2a2a4a; color: #e0e0e0; border-radius: 4px;"
       >
     </div>
@@ -46,7 +46,7 @@
         hx-trigger="change"
         hx-target="#fornecedores-list"
         hx-swap="innerHTML"
-        hx-include="[name='q']"
+        hx-include="[name='q'],[name='mostrar_inativos']"
         style="width: 100%; padding: 0.5rem 0.75rem; background: #16213e; border: 1px solid #2a2a4a; color: #e0e0e0; border-radius: 4px;"
       >
         <option value="">Todas as categorias</option>
@@ -57,6 +57,24 @@
         {% endfor %}
       </select>
     </div>
+  </div>
+
+  <!-- Filtro inativos -->
+  <div style="margin-bottom: 1rem;">
+    <label style="display: flex; align-items: center; gap: 0.5rem; color: #aaa; font-size: 0.85rem; cursor: pointer;">
+      <input
+        type="checkbox"
+        name="mostrar_inativos"
+        value="1"
+        {% if mostrar_inativos %}checked{% endif %}
+        hx-get="{% url 'fornecedores:lista' %}"
+        hx-trigger="change"
+        hx-target="#fornecedores-list"
+        hx-swap="innerHTML"
+        hx-include="[name='q'],[name='categoria']"
+      >
+      Mostrar fornecedores inativos
+    </label>
   </div>
 
   <!-- Lista de fornecedores (alvo do HTMX) -->
