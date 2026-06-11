@@ -264,8 +264,8 @@ def test_reprovar_sem_motivo_rejeitado(client, gestor, req_pendente_gestor):
         {"motivo": ""},
     )
 
-    # Status 200 retorna o modal com erros — sem transicionar
-    assert response.status_code == 200
+    # Status 422 retorna o modal com erros — sem transicionar (WR-02: HX-Retarget)
+    assert response.status_code == 422
     req_pendente_gestor.refresh_from_db()
     assert req_pendente_gestor.status == Requisicao.Status.PENDENTE_GESTOR
 

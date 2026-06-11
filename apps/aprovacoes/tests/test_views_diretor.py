@@ -241,8 +241,8 @@ def test_reprovar_diretor_sem_motivo_rejeitado(
         data={"motivo": ""},
     )
 
-    # Deve retornar o modal com erros (nao transicionar)
-    assert response.status_code == 200
+    # Deve retornar o modal com erros (nao transicionar) — 422 com HX-Retarget (WR-02)
+    assert response.status_code == 422
     requisicao_pendente_diretor.refresh_from_db()
     assert requisicao_pendente_diretor.status == Requisicao.Status.PENDENTE_DIRETOR, (
         "Status nao deve mudar sem motivo valido"
