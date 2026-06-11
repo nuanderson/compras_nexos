@@ -1,14 +1,17 @@
 """
 Testes de views para apps/cotacoes.
 
-TestNovaRFQView: conectada no plano 02 — COT-01 GREEN.
-Demais classes (plano 03): ainda em skip.
+TestNovaRFQView: COT-01 — conectada no plano 02 (GREEN).
+TestAdicionarCotacaoView: COT-02 — conectada no plano 03.
+TestRemoverCotacaoView: COT-02 — conectada no plano 03.
+TestModalSelecionarVencedor: COT-04 — conectada no plano 03.
+TestBloqueioPosSeletcao: COT-04 — conectada no plano 03.
 """
 from decimal import Decimal
 
 import pytest
 
-from apps.cotacoes.models import RFQ
+from apps.cotacoes.models import CotacaoFornecedor, RFQ
 from apps.requisicoes.models import Requisicao
 
 
@@ -134,9 +137,18 @@ class TestNovaRFQView:
         assert not RFQ.objects.filter(requisicao=req).exists()
 
 
-@pytest.mark.skip(reason="View conectada no plano 03")
 class TestAdicionarCotacaoView:
-    def test_adicionar_cotacao_retorna_redirect_htmx(self, client, comprador_user, rfq, fornecedor):
+    """
+    Testes COT-02: adição de cotação de fornecedor via POST.
+
+    Cobre:
+      D-10    HX-Redirect após add mantém deltas consistentes (Pitfall 2)
+      T-04-03 Guard rfq.tem_vencedor → 403
+    """
+
+    def test_adicionar_cotacao_retorna_redirect_htmx(
+        self, client, comprador_user, rfq, fornecedor
+    ):
         """POST para adicionar cotacao deve retornar HX-Redirect para detalhe do RFQ."""
         client.force_login(comprador_user)
         response = client.post(
@@ -149,12 +161,40 @@ class TestAdicionarCotacaoView:
             },
             HTTP_HX_REQUEST="true",
         )
-        assert response.status_code in (200, 302)
-        assert "HX-Redirect" in response or response.status_code == 302
+        # HX-Redirect deve estar presente no header
+        assert "HX-Redirect" in response
+        assert response.status_code == 200
+        # Cotação deve existir no banco
+        assert CotacaoFornecedor.objects.filter(rfq=rfq, fornecedor=fornecedor).exists()
+
+    def test_adicionar_cotacao_bloqueia_apos_vencedor(
+        self, client, comprador_user, rfq, cotacao_fornecedor, fornecedor
+    ):
+        """Após selecionar vencedor, adicionar cotação deve retornar 403 (T-04-03)."""
+        rfq.vencedor = cotacao_fornecedor
+        rfq.save()
+
+        client.force_login(comprador_user)
+        response = client.post(
+            f"/cotacoes/{rfq.pk}/cotacoes/adicionar/",
+            data={
+                "fornecedor": fornecedor.pk,
+                "preco_unitario": "300.00",
+            },
+            HTTP_HX_REQUEST="true",
+        )
+        assert response.status_code == 403
 
 
-@pytest.mark.skip(reason="View conectada no plano 03")
 class TestRemoverCotacaoView:
+    """
+    Testes COT-02: remoção de cotação via POST.
+
+    Cobre:
+      D-10    HX-Redirect após remove mantém deltas consistentes
+      T-04-03 Guard rfq.tem_vencedor → 403
+    """
+
     def test_remover_cotacao_retorna_redirect_htmx(
         self, client, comprador_user, rfq, cotacao_fornecedor
     ):
@@ -164,11 +204,33 @@ class TestRemoverCotacaoView:
             f"/cotacoes/{rfq.pk}/cotacoes/{cotacao_fornecedor.pk}/remover/",
             HTTP_HX_REQUEST="true",
         )
-        assert response.status_code in (200, 302)
+        assert "HX-Redirect" in response
+        assert response.status_code == 200
+        # Cotação deve ter sido removida
+        assert not CotacaoFornecedor.objects.filter(pk=cotacao_fornecedor.pk).exists()
+
+    def test_remover_cotacao_bloqueia_apos_vencedor(
+        self, client, comprador_user, rfq, cotacao_fornecedor
+    ):
+        """Após selecionar vencedor, remover cotação deve retornar 403 (T-04-03)."""
+        rfq.vencedor = cotacao_fornecedor
+        rfq.save()
+
+        client.force_login(comprador_user)
+        response = client.post(
+            f"/cotacoes/{rfq.pk}/cotacoes/{cotacao_fornecedor.pk}/remover/",
+            HTTP_HX_REQUEST="true",
+        )
+        assert response.status_code == 403
 
 
-@pytest.mark.skip(reason="View conectada no plano 03")
 class TestBloqueioPosSeletcao:
+    """
+    Testes de bloqueio total pós-seleção (T-04-03).
+
+    Após seleção do vencedor, add/remove/modal-selecionar devem ser bloqueados.
+    """
+
     def test_bloqueia_adicionar_apos_vencedor(
         self, client, comprador_user, rfq, cotacao_fornecedor, fornecedor
     ):
@@ -199,27 +261,78 @@ class TestBloqueioPosSeletcao:
         )
         assert response.status_code == 403
 
-
-@pytest.mark.skip(reason="View conectada no plano 03")
-class TestModalSelecionarVencedor:
-    def test_get_retorna_partial_modal(self, client, comprador_user, rfq, cotacao_fornecedor):
-        """GET para modal de selecao deve retornar partial HTML com form."""
+    def test_bloqueia_modal_selecionar_apos_vencedor(
+        self, client, comprador_user, rfq, cotacao_fornecedor
+    ):
+        """Apos selecionar vencedor, GET em modal-selecionar deve retornar 409 (T-04-03)."""
+        rfq.vencedor = cotacao_fornecedor
+        rfq.save()
         client.force_login(comprador_user)
         response = client.get(
-            f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/",
+            f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/modal/",
+            HTTP_HX_REQUEST="true",
+        )
+        assert response.status_code == 409
+
+
+class TestModalSelecionarVencedor:
+    """
+    Testes COT-04: seleção de vencedor via modal HTMX.
+
+    Cobre:
+      D-07    Vencedor imutável após seleção
+      T-04-06 ValueError → 409 (justificativa vazia ou vencedor já definido)
+    """
+
+    def test_get_retorna_partial_modal(self, client, comprador_user, rfq, cotacao_fornecedor):
+        """GET para modal de selecao deve retornar partial HTML com form de justificativa."""
+        client.force_login(comprador_user)
+        response = client.get(
+            f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/modal/",
             HTTP_HX_REQUEST="true",
         )
         assert response.status_code == 200
+        assert b"justificativa" in response.content
 
     def test_post_confirma_selecao_e_redireciona(
         self, client, comprador_user, rfq, cotacao_fornecedor
     ):
-        """POST com justificativa deve selecionar vencedor e redirecionar."""
+        """POST com justificativa deve selecionar vencedor e retornar HX-Redirect."""
         client.force_login(comprador_user)
         response = client.post(
             f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/",
             data={"justificativa": "Melhor custo-beneficio."},
         )
-        assert response.status_code in (200, 302)
+        assert "HX-Redirect" in response
+        assert response.status_code == 200
         rfq.refresh_from_db()
         assert rfq.tem_vencedor is True
+
+    def test_post_justificativa_vazia_retorna_409(
+        self, client, comprador_user, rfq, cotacao_fornecedor
+    ):
+        """POST com justificativa vazia deve retornar 409 e RFQ sem vencedor (T-04-06)."""
+        client.force_login(comprador_user)
+        response = client.post(
+            f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/",
+            data={"justificativa": ""},
+        )
+        assert response.status_code == 409
+        rfq.refresh_from_db()
+        assert rfq.tem_vencedor is False
+
+    def test_post_segundo_selecionar_retorna_409(
+        self, client, comprador_user, rfq, cotacao_fornecedor
+    ):
+        """POST quando vencedor já definido deve retornar 409 (T-04-06, D-07)."""
+        # Selecionar vencedor primeiro
+        rfq.vencedor = cotacao_fornecedor
+        rfq.justificativa_selecao = "Primeira seleção."
+        rfq.save()
+
+        client.force_login(comprador_user)
+        response = client.post(
+            f"/cotacoes/{rfq.pk}/selecionar-vencedor/{cotacao_fornecedor.pk}/",
+            data={"justificativa": "Tentativa de segunda seleção."},
+        )
+        assert response.status_code == 409

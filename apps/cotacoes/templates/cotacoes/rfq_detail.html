@@ -41,15 +41,110 @@
     </table>
   </div>
 
-  {# Comparativo de preços — preenchido pelo plano 03 #}
-  <div id="comparativo-container">
-    <div class="card" style="max-width:900px;text-align:center;padding:2rem;">
-      <p style="font-size:1rem;color:var(--text-muted,#888);">
+  {# Card de vencedor — exibido apenas quando RFQ encerrado (COT-04, D-07) #}
+  {% if rfq.tem_vencedor %}
+    <div class="card" style="max-width:900px;margin-bottom:1.5rem;border-color:#e94560;">
+      <h3 style="margin-bottom:0.75rem;color:#e94560;">Vencedor Selecionado</h3>
+      <table style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+            <td style="padding:6px 12px;font-weight:600;width:35%;">Fornecedor</td>
+            <td style="padding:6px 12px;">{{ rfq.vencedor.fornecedor.razao_social }}</td>
+          </tr>
+          <tr style="background:rgba(255,255,255,0.03);">
+            <td style="padding:6px 12px;font-weight:600;">Preço Unitário</td>
+            <td style="padding:6px 12px;"><strong>R$ {{ rfq.vencedor.preco_unitario|floatformat:2 }}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 12px;font-weight:600;">Prazo de Entrega</td>
+            <td style="padding:6px 12px;">{{ rfq.vencedor.prazo_entrega|default:"—" }}</td>
+          </tr>
+          <tr style="background:rgba(255,255,255,0.03);">
+            <td style="padding:6px 12px;font-weight:600;">Condições de Pagamento</td>
+            <td style="padding:6px 12px;">{{ rfq.vencedor.condicoes_pagamento|default:"—" }}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 12px;font-weight:600;">Justificativa</td>
+            <td style="padding:6px 12px;">{{ rfq.justificativa_selecao }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {# Tabela comparativa de cotações (COT-03, D-09, D-10) #}
+  <div class="card" style="max-width:900px;margin-bottom:1.5rem;">
+    <h3 style="margin-bottom:1rem;">Comparativo de Cotações</h3>
+    {% if comparativo %}
+      <div class="table-container" style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;min-width:700px;">
+          <thead>
+            <tr style="border-bottom:2px solid rgba(255,255,255,0.1);">
+              <th style="padding:8px 12px;text-align:left;">Fornecedor</th>
+              <th style="padding:8px 12px;text-align:left;">Preço Unitário</th>
+              <th style="padding:8px 12px;text-align:left;">Delta %</th>
+              <th style="padding:8px 12px;text-align:left;">Prazo</th>
+              <th style="padding:8px 12px;text-align:left;">Condições</th>
+              <th style="padding:8px 12px;text-align:left;">Observações</th>
+              <th style="padding:8px 12px;text-align:left;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in comparativo %}
+              {% include "cotacoes/partials/cotacao_row.html" %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p style="font-size:1rem;color:var(--text-muted,#888);text-align:center;padding:1.5rem 0;">
         Adicione cotações de fornecedores para ver o comparativo.
       </p>
-    </div>
+    {% endif %}
   </div>
 
-  {# Container para modais HTMX — usado pelo plano 03 #}
+  {# Formulário inline de adição de cotação — oculto após seleção do vencedor (D-08) #}
+  {% if not rfq.tem_vencedor %}
+    <div class="card" style="max-width:900px;margin-bottom:1.5rem;">
+      <h3 style="margin-bottom:1rem;">Adicionar Cotação</h3>
+      <form
+        hx-post="{% url 'cotacoes:adicionar-cotacao' rfq.pk %}"
+        hx-target="body"
+        hx-swap="none">
+        {% csrf_token %}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+          <div class="form-group">
+            <label class="form-label">{{ form.fornecedor.label }} *</label>
+            {{ form.fornecedor }}
+            {% for error in form.fornecedor.errors %}
+              <p class="form-error" style="color:var(--color-destructive,#e94560);font-size:13px;margin-top:4px;">{{ error }}</p>
+            {% endfor %}
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ form.preco_unitario.label }} *</label>
+            {{ form.preco_unitario }}
+            {% for error in form.preco_unitario.errors %}
+              <p class="form-error" style="color:var(--color-destructive,#e94560);font-size:13px;margin-top:4px;">{{ error }}</p>
+            {% endfor %}
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ form.prazo_entrega.label }}</label>
+            {{ form.prazo_entrega }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ form.condicoes_pagamento.label }}</label>
+            {{ form.condicoes_pagamento }}
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label class="form-label">{{ form.observacoes.label }}</label>
+          {{ form.observacoes }}
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Cotação</button>
+      </form>
+    </div>
+  {% endif %}
+
+  {# Container para modais HTMX (COT-04) #}
   <div id="modal-container"></div>
 {% endblock %}

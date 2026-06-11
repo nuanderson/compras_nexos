@@ -1,0 +1,47 @@
+{# Linha da tabela comparativa de cotações (COT-03, D-09) #}
+{# Contexto esperado: item (dict com cotacao, delta, is_menor), rfq #}
+<tr>
+  <td style="padding:8px 12px;">{{ item.cotacao.fornecedor.razao_social }}</td>
+  <td style="padding:8px 12px;">
+    {% if item.is_menor %}
+      <span class="badge" style="background-color:#e94560;color:#fff;padding:3px 8px;border-radius:4px;font-size:13px;">
+        Menor preço
+      </span>
+      <strong>R$ {{ item.cotacao.preco_unitario|floatformat:2 }}</strong>
+    {% else %}
+      R$ {{ item.cotacao.preco_unitario|floatformat:2 }}
+    {% endif %}
+  </td>
+  <td style="padding:8px 12px;">
+    {% if item.delta > 0 %}
+      <span style="color:#f59e0b;">+{{ item.delta }}%</span>
+    {% else %}
+      <span style="color:#e94560;">—</span>
+    {% endif %}
+  </td>
+  <td style="padding:8px 12px;">{{ item.cotacao.prazo_entrega|default:"—" }}</td>
+  <td style="padding:8px 12px;">{{ item.cotacao.condicoes_pagamento|default:"—" }}</td>
+  <td style="padding:8px 12px;">{{ item.cotacao.observacoes|default:"—" }}</td>
+  <td style="padding:8px 12px;">
+    {% if not rfq.tem_vencedor %}
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button
+          hx-post="{% url 'cotacoes:remover-cotacao' rfq.pk item.cotacao.pk %}"
+          hx-confirm="Deseja remover a cotação de {{ item.cotacao.fornecedor.razao_social }}?"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+          class="btn btn-secondary"
+          style="font-size:12px;padding:4px 10px;">
+          Remover
+        </button>
+        <button
+          hx-get="{% url 'cotacoes:modal-selecionar' rfq.pk item.cotacao.pk %}"
+          hx-target="#modal-container"
+          hx-swap="innerHTML"
+          class="btn btn-primary"
+          style="font-size:12px;padding:4px 10px;">
+          Selecionar Vencedor
+        </button>
+      </div>
+    {% endif %}
+  </td>
+</tr>
