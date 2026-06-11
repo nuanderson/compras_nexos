@@ -25,10 +25,14 @@ Sistema de gestão de compras para empresa de pequeno porte (até 20 usuários).
 - Histórico de auditoria completo por requisição
 - Acompanhamento de status em tempo real
 
-### 🔜 Fase 3 — Fornecedores & Estoque
-- Cadastro de fornecedores com validação de CNPJ
-- Busca e filtros por nome, CNPJ e categoria
-- Controle de estoque por unidade com alertas de quantidade mínima
+### ✅ Fase 3 — Fornecedores & Estoque
+- Cadastro de fornecedores com validação de CNPJ (incluindo formato alfanumérico jul/2026)
+- Busca fuzzy por nome (pg_trgm) e busca exata por CNPJ, com filtro por categoria
+- Inativação/reativação de fornecedor sem perda de histórico
+- Cadastro de itens de estoque por unidade organizacional com unidade de medida configurável
+- Alertas visuais de quantidade abaixo do mínimo
+- Atualização de quantidade inline via HTMX com proteção contra concorrência (select_for_update)
+- Visão consolidada de estoque para Comprador/Admin
 
 ### 🔜 Fase 4 — Cotações (RFQ)
 - RFQ vinculado a requisição aprovada
@@ -94,6 +98,8 @@ compras_nexos/
 │   ├── accounts/        # Usuários, perfis, unidades organizacionais
 │   ├── aprovacoes/      # Fluxo de aprovação, logs de auditoria, alçadas
 │   ├── core/            # Models base (TimestampedModel, AuditedModel)
+│   ├── estoque/         # Itens de estoque por unidade, UnidadeMedida
+│   ├── fornecedores/    # Cadastro de fornecedores com validação CNPJ
 │   └── requisicoes/     # Requisições de compra
 ├── config/              # Settings (base, dev, prod), URLs, WSGI
 ├── static/              # CSS, HTMX vendorizado
@@ -111,6 +117,6 @@ compras_nexos/
 |------|-----------|--------|
 | 1 | Fundação | ✅ Completa |
 | 2 | Requisições & Aprovações | ✅ Completa |
-| 3 | Fornecedores & Estoque | 🔜 Próxima |
+| 3 | Fornecedores & Estoque | ✅ Completa |
 | 4 | Cotações (RFQ) | 🔜 Pendente |
 | 5 | Relatórios & Dashboard | 🔜 Pendente |

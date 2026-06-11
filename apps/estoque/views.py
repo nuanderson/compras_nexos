@@ -61,11 +61,21 @@ class CadastrarItemEstoqueView(LoginRequiredMixin, View):
 
     template_name = "estoque/form.html"
 
+    _ERRO_SEM_UNIDADE = (
+        "Seu usuário não possui unidade organizacional definida. "
+        "Peça ao administrador para configurar sua unidade antes de cadastrar itens."
+    )
+
     def get(self, request):
-        form = ItemEstoqueForm()
-        return render(request, self.template_name, {"form": form, "titulo": "Novo Item"})
+        ctx = {"form": ItemEstoqueForm(), "titulo": "Novo Item"}
+        if not request.user.default_unit:
+            ctx["erro_unidade"] = self._ERRO_SEM_UNIDADE
+        return render(request, self.template_name, ctx)
 
     def post(self, request):
+        if not request.user.default_unit:
+            ctx = {"form": ItemEstoqueForm(), "titulo": "Novo Item", "erro_unidade": self._ERRO_SEM_UNIDADE}
+            return render(request, self.template_name, ctx)
         form = ItemEstoqueForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
