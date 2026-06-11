@@ -206,20 +206,50 @@ def cancelar_requisicao(requisicao_pk: int, solicitante) -> Requisicao:
 
 def _notificar_gestores(requisicao_pk: int) -> None:
     """
-    STUB — Notificação de e-mail aos Gestores da unidade. (REQ-04, D-07, D-16)
+    Notificacao de e-mail aos Gestores da unidade. (REQ-04, D-07, D-16, D-18)
 
-    Esta função é chamada via transaction.on_commit após submeter_requisicao().
-    O envio real do e-mail (REQ-04, D-07, D-16) pertence ao slice do Gestor no Plano 03.
+    Chamada via transaction.on_commit apos submeter_requisicao().
+    Envia e-mail a TODOS os Gestores ativos da unidade da requisicao.
 
-    *** IMPLEMENTAÇÃO REAL PENDENTE — PLANO 03 ***
-
-    A função NÃO levanta exceção (seria engolida pelo on_commit),
-    mas emite um WARNING visível nos logs para que a ausência de implementação
-    não passe despercebida. O Plano 03 substituirá este corpo pelo envio real
-    via django-anymail + AWS SES.
+    Falha silenciosa (D-07): sem Gestores ativos na unidade, retorna sem enviar.
+    Nao usa Celery (D-18). Nao notifica o Solicitante (D-17).
     """
-    logger.warning(
-        "STUB: _notificar_gestores não implementado — "
-        "REQ-04 requer implementação no Plano 03 (requisicao_pk=%s)",
-        requisicao_pk,
+    from apps.requisicoes.models import Requisicao  # import tardio: evita circular
+    from django.core.mail import send_mail
+    from apps.accounts.models import User
+
+    try:
+        req = Requisicao.objects.select_related("unidade", "criado_por").get(pk=requisicao_pk)
+    except Requisicao.DoesNotExist:
+        return
+
+    gestores = User.objects.filter(
+        role=User.Role.GESTOR,
+        default_unit=req.unidade,
+        is_active=True,
+    )
+    destinatarios = list(gestores.values_list("email", flat=True))
+    if not destinatarios:
+        return  # falha silenciosa (D-07)
+
+    assunto = f"[ComprasNexos] Nova requisicao aguardando aprovacao -- {req.descricao[:50]}"
+    solicitante_nome = req.criado_por.get_full_name() or req.criado_por.email
+    corpo = "\n".join([
+        "Prezado(a) Gestor(a),",
+        "",
+        "Uma nova requisicao de compra aguarda seu parecer:",
+        "",
+        f"Solicitante: {solicitante_nome}",
+        f"Unidade: {req.unidade.nome}",
+        f"Descricao: {req.descricao}",
+        f"Valor estimado: R$ {req.valor_estimado:,.2f}",
+        "",
+        "Acesse o sistema para aprovar ou reprovar esta requisicao.",
+    ])
+    send_mail(
+        subject=assunto,
+        message=corpo,
+        from_email=None,
+        recipient_list=destinatarios,
+        fail_silently=True,
     )

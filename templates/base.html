@@ -35,6 +35,14 @@
           Requisições
         </a>
 
+        <!-- Aprovações — gestor + admin -->
+        {% if request.user.role == 'gestor' or request.user.role == 'admin' or request.user.is_superuser %}
+        <a href="{% url 'aprovacoes:fila-gestor' %}"
+           class="nav-item {% if 'aprovacoes' in request.path %}is-active{% endif %}">
+          Aprovações
+        </a>
+        {% endif %}
+
         <!-- Cotações — comprador + admin only -->
         {% if request.user.role == 'comprador' or request.user.role == 'admin' %}
         <a href="#"
