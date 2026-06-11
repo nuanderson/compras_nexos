@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-10T18:44:49.956Z"
+last_updated: "2026-06-10T23:54:12Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 7
-  completed_plans: 3
-  percent: 20
+  completed_plans: 7
+  percent: 25
 ---
 
 # State: ComprasNexos
@@ -27,14 +27,13 @@ progress:
 ## Current Position
 
 Phase: 02 (Requisitions & Approvals) — EXECUTING
-Plan: 1 of 4
+Plan: 3 of 4 COMPLETE
 **Phase:** 2
-**Plan:** Not started
-**Status:** Executing Phase 02
-**Phase goal:** Users can authenticate, and the Admin can manage accounts and organizational units
+**Plan:** 03 complete (Gestor slice)
+**Status:** Executing Phase 02 — 3/4 plans complete
 
 ```
-Progress: [----------] 0% — Phase 1 not started
+Progress: [###-------] 25% — Phase 02 in progress (3/4 plans done)
 ```
 
 | Phase | Name | Status |
@@ -67,6 +66,8 @@ Progress: [----------] 0% — Phase 1 not started
 | EST-* grouped in Phase 3 with FORN-* | Both are per-unit/supplier data with no dependency on RFQ; same delivery boundary |
 | UNIT-04 placed in Phase 5 | Report filters depend on the reports app existing — natural final phase |
 | `relatorios` app has no models | It imports from all other apps — architectural mandate from research |
+| Modal reprovacao retorna HttpResponse vazio (outerHTML swap) | Remove linha da fila sem reload de pagina; simples e deterministico |
+| AprovarGestorView retorna HttpResponse vazio em sucesso | Remove linha da fila via outerHTML swap — comportamento correto para fila PENDENTE_GESTOR |
 
 ### Architectural Constraints (from research)
 
@@ -103,8 +104,8 @@ None.
 
 ## Session Continuity
 
-**Last action:** Roadmap and STATE.md created — planning complete
-**Next action:** Run `/gsd-plan-phase 1` to decompose Phase 1 into executable plans
+**Last action:** Completed Phase 02 Plan 03 — Gestor slice (fila, modal HTMX, e-mail transacional)
+**Next action:** Execute Phase 02 Plan 04 (Diretor slice)
 **Session started:** 2026-06-10
 
 ---
