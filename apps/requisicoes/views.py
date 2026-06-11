@@ -91,9 +91,27 @@ class RequisicaoListView(SolicitanteRequiredMixin, ListView):
     context_object_name = "requisicoes"
 
     def get_queryset(self):
+        user = self.request.user
+        if user.is_superuser or user.role in ("admin", "diretor"):
+            return (
+                Requisicao.objects
+                .select_related("criado_por", "categoria", "unidade")
+                .order_by("-criado_em")
+            )
+        if user.role == "gestor":
+            if not user.default_unit:
+                return Requisicao.objects.none()
+            return (
+                Requisicao.objects
+                .filter(unidade=user.default_unit)
+                .select_related("criado_por", "categoria", "unidade")
+                .order_by("-criado_em")
+            )
+        # solicitante / comprador — proprias apenas (CR-03)
         return (
-            Requisicao.objects.filter(criado_por=self.request.user)
-            .select_related("categoria", "unidade")
+            Requisicao.objects
+            .filter(criado_por=user)
+            .select_related("criado_por", "categoria", "unidade")
             .order_by("-criado_em")
         )
 
