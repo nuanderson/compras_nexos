@@ -32,6 +32,18 @@ class ItemEstoqueForm(forms.ModelForm):
             "quantidade_minima": "Quantidade Mínima",
         }
 
+    def clean_quantidade_atual(self):
+        valor = self.cleaned_data.get("quantidade_atual")
+        if valor is not None and valor < 0:
+            raise forms.ValidationError("A quantidade não pode ser negativa.")
+        return valor
+
+    def clean_quantidade_minima(self):
+        valor = self.cleaned_data.get("quantidade_minima")
+        if valor is not None and valor < 0:
+            raise forms.ValidationError("A quantidade mínima não pode ser negativa.")
+        return valor
+
 
 class AtualizarQuantidadeForm(forms.ModelForm):
     """
