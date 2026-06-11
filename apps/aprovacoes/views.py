@@ -114,10 +114,16 @@ class ReprovarGestorView(GestorRequiredMixin, View):
         form = ReprovaForm(request.POST)
         if not form.is_valid():
             # Retorna o modal com erros sem transicionar o estado (APROV-05)
-            return render(request, "aprovacoes/partials/modal_reprovar.html", {
+            # WR-02: redirecionar o swap para #modal-container para evitar
+            # injetar HTML do modal dentro do <tr> da fila (HTML invalido)
+            from django_htmx.http import retarget, reswap
+            response = render(request, "aprovacoes/partials/modal_reprovar.html", {
                 "requisicao": req,
                 "form": form,
-            }, status=200)
+            }, status=422)
+            retarget(response, "#modal-container")
+            reswap(response, "innerHTML")
+            return response
         try:
             services.reprovar_requisicao(pk, request.user, form.cleaned_data["motivo"])
         except (ValueError, PermissionError) as e:
@@ -215,10 +221,16 @@ class ReprovarDiretorView(DiretorRequiredMixin, View):
         form = ReprovaForm(request.POST)
         if not form.is_valid():
             # Retorna o modal com erros sem transicionar o estado (APROV-05)
-            return render(request, "aprovacoes/partials/modal_reprovar_diretor.html", {
+            # WR-02: redirecionar o swap para #modal-container para evitar
+            # injetar HTML do modal dentro do <tr> da fila (HTML invalido)
+            from django_htmx.http import retarget, reswap
+            response = render(request, "aprovacoes/partials/modal_reprovar_diretor.html", {
                 "requisicao": req,
                 "form": form,
-            }, status=200)
+            }, status=422)
+            retarget(response, "#modal-container")
+            reswap(response, "innerHTML")
+            return response
         try:
             services.reprovar_requisicao(pk, request.user, form.cleaned_data["motivo"])
         except (ValueError, PermissionError) as e:
