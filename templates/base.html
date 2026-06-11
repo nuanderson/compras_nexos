@@ -67,6 +67,12 @@
         </a>
         {% endif %}
 
+        <!-- Estoque — visible to all authenticated roles -->
+        <a href="{% url 'estoque:lista' %}"
+           class="nav-item {% if 'estoque' in request.path %}is-active{% endif %}">
+          Estoque
+        </a>
+
         <!-- Relatórios — comprador + diretor + admin -->
         {% if request.user.role == 'comprador' or request.user.role == 'diretor' or request.user.role == 'admin' %}
         <a href="#"
