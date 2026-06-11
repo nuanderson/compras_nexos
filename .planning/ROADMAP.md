@@ -11,7 +11,7 @@
 
 - [x] **Phase 1: Foundation** - Custom user model, login, unit management — database and auth foundation (completed 2026-06-10)
 - [x] **Phase 2: Requisitions & Approvals** - Full purchase requisition workflow with configurable 2-level approval (completed 2026-06-11)
-- [ ] **Phase 3: Suppliers & Inventory** - Supplier directory with CNPJ validation and per-unit stock management
+- [x] **Phase 3: Suppliers & Inventory** - Supplier directory with CNPJ validation and per-unit stock management (completed 2026-06-11)
 - [ ] **Phase 4: Quotations (RFQ)** - RFQ creation, multi-supplier quote entry, price comparison, winner selection
 - [ ] **Phase 5: Reports & Dashboard** - Cross-app KPI dashboard, spending reports, and PDF export
 
@@ -93,7 +93,7 @@ Plans:
   4. Solicitante can add stock items to their unit with name, unit of measure, current quantity, and minimum threshold — items below the minimum are visually highlighted
   5. Each unit sees only its own inventory; Buyer and Admin see a consolidated view across all units
 
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 **Wave 1** *(paralelo — sem dependências entre si)*
 
 - [x] 03-01-PLAN.md — App fornecedores: modelo Fornecedor, validação CNPJ via python-stdnum, busca fuzzy pg_trgm, toggle ativo HTMX, testes FORN-01..05
@@ -101,7 +101,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 03-03-PLAN.md — Navegação: links fornecedores/estoque no base.html + validação da suite completa
+- [x] 03-03-PLAN.md — Navegação: links fornecedores/estoque no base.html + validação da suite completa
 
 **UI hint:** yes
 
@@ -149,7 +149,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
-| 3. Suppliers & Inventory | 2/3 | In Progress|  |
+| 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
 
