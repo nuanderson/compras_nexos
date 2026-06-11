@@ -187,7 +187,14 @@ Sistema de gestão de compras para cliente corporativo de pequeno porte (até 20
 
 ## Conventions
 
-Conventions not yet established. Will populate as patterns emerge during development.
+### Encerramento de fase (obrigatório)
+
+Ao concluir cada fase (após code review e testes verdes), executar obrigatoriamente:
+
+1. **Atualizar README.md** — marcar a fase concluída como ✅ e atualizar qualquer informação relevante de funcionalidades ou setup.
+2. **Push para o GitHub** — `git push origin master`. O repositório é `https://github.com/nuanderson/compras_nexos`.
+
+Nenhuma fase é considerada finalizada sem esses dois passos.
 <!-- GSD:conventions-end -->
 
 <!-- GSD:architecture-start source:ARCHITECTURE.md -->
