@@ -122,12 +122,16 @@ class AtualizarQuantidadeView(LoginRequiredMixin, View):
     """
 
     def post(self, request, pk):
+        user = request.user
         try:
             with transaction.atomic():
-                item = ItemEstoque.objects.select_for_update().get(
-                    pk=pk,
-                    unidade_organizacional=request.user.default_unit,
-                )
+                if user.is_superuser or user.role in ("comprador", "admin"):
+                    item = ItemEstoque.objects.select_for_update().get(pk=pk)
+                else:
+                    item = ItemEstoque.objects.select_for_update().get(
+                        pk=pk,
+                        unidade_organizacional=user.default_unit,
+                    )
                 form = AtualizarQuantidadeForm(request.POST, instance=item)
                 if form.is_valid():
                     form.save()
