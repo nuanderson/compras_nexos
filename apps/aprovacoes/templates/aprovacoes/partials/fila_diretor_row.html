@@ -8,6 +8,7 @@
   <td>
     <button
       hx-post="{% url 'aprovacoes:aprovar-diretor' req.pk %}"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
       hx-target="#fila-diretor-row-{{ req.pk }}"
       hx-swap="outerHTML"
       class="btn btn-primary btn-sm"
