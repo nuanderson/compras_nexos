@@ -180,6 +180,7 @@ class AprovarDiretorView(DiretorRequiredMixin, View):
     """
 
     def post(self, request, pk):
+        get_object_or_404(Requisicao, pk=pk)   # raises 404 for unknown pk (CR-01)
         try:
             services.aprovar_diretor(pk, request.user)
         except (ValueError, PermissionError) as e:
