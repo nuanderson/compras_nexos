@@ -93,7 +93,16 @@ Plans:
   4. Solicitante can add stock items to their unit with name, unit of measure, current quantity, and minimum threshold — items below the minimum are visually highlighted
   5. Each unit sees only its own inventory; Buyer and Admin see a consolidated view across all units
 
-**Plans:** TBD
+**Plans:** 2/3 plans executed
+**Wave 1** *(paralelo — sem dependências entre si)*
+
+- [x] 03-01-PLAN.md — App fornecedores: modelo Fornecedor, validação CNPJ via python-stdnum, busca fuzzy pg_trgm, toggle ativo HTMX, testes FORN-01..05
+- [x] 03-02-PLAN.md — App estoque: UnidadeMedida com seed migration, ItemEstoque com isolamento por unidade, select_for_update, testes EST-01..06
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 03-03-PLAN.md — Navegação: links fornecedores/estoque no base.html + validação da suite completa
+
 **UI hint:** yes
 
 ---
@@ -140,7 +149,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
-| 3. Suppliers & Inventory | 0/? | Not started | - |
+| 3. Suppliers & Inventory | 2/3 | In Progress|  |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
 
@@ -195,4 +204,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-06-10*
-*Last updated: 2026-06-10 — Phase 2 decomposed into 4 plans*
+*Last updated: 2026-06-11 — Phase 3 decomposed into 3 plans*
