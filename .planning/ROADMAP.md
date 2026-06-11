@@ -120,7 +120,23 @@ Plans:
   3. System displays a side-by-side price comparison that automatically highlights the lowest-price quote and shows the percentage delta between each supplier and the winner
   4. Buyer can select a winning supplier with a mandatory written justification; the selection is immutable once saved and the full quote history remains accessible for audit
 
-**Plans:** TBD
+**Plans:** 4 plans
+**Wave 1**
+
+- [ ] 04-01-PLAN.md — Fundacao: app cotacoes, modelos RFQ + CotacaoFornecedor, migracao, service layer (criar/comparativo/selecionar vencedor) e scaffold de testes Wave 0
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 04-02-PLAN.md — Slice de criacao de RFQ: hub /cotacoes/, NovaRFQView com select filtrado (APROVADO sem RFQ), DetalheRFQView, templates, registro de URLs
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 04-03-PLAN.md — Slice de cotacoes + comparativo + vencedor: add/remove cotacao via HX-Redirect, tabela comparativa com delta %, modal de selecao imutavel
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
+- [ ] 04-04-PLAN.md — Navegacao (link Cotacoes no nav) + validacao da suite completa + README
+
 **UI hint:** yes
 
 ---
@@ -150,7 +166,7 @@ Plans:
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
-| 4. Quotations (RFQ) | 0/? | Not started | - |
+| 4. Quotations (RFQ) | 0/4 | Planned | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
 
 ---
@@ -204,4 +220,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-06-10*
-*Last updated: 2026-06-11 — Phase 3 decomposed into 3 plans*
+*Last updated: 2026-06-11 — Phase 4 decomposed into 4 plans*
