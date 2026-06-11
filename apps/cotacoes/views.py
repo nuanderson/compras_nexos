@@ -150,7 +150,10 @@ class RemoverCotacaoView(CompradorRequiredMixin, View):
         if rfq.tem_vencedor:
             return HttpResponse("RFQ encerrado.", status=403)
 
-        services.remover_cotacao(rfq, cotacao_pk)
+        try:
+            services.remover_cotacao(rfq, cotacao_pk)
+        except CotacaoFornecedor.DoesNotExist:
+            return HttpResponse("Cotação não encontrada.", status=404)
         # D-10: HX-Redirect recarrega página inteira para deltas consistentes
         return HttpResponseClientRedirect(
             reverse("cotacoes:detalhe", args=[rfq.pk])
@@ -195,6 +198,8 @@ class SelecionarVencedorView(CompradorRequiredMixin, View):
         except ValueError as e:
             # T-04-06: justificativa vazia ou vencedor já definido → 409
             return HttpResponse(str(e), status=409)
+        except CotacaoFornecedor.DoesNotExist:
+            return HttpResponse("Cotação não encontrada.", status=404)
         # Sucesso: HX-Redirect para página de detalhe
         return HttpResponseClientRedirect(
             reverse("cotacoes:detalhe", args=[rfq_pk])
