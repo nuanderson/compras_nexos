@@ -97,4 +97,4 @@ class ConfiguracaoAlcada(models.Model):
         """
         if self.valor_maximo_gestor is None:
             return True  # fail-safe: sem configuração = sempre 2 níveis
-        return valor >= self.valor_maximo_gestor
+        return valor > self.valor_maximo_gestor  # Gestor aprova ATÉ o limite (inclusive) (CR-04)
