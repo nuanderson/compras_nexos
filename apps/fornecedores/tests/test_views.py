@@ -44,6 +44,7 @@ class TestListaFornecedoresView:
             url,
             {"q": "Empresa"},
             HTTP_HX_REQUEST="true",
+            HTTP_HX_TARGET="fornecedores-list",
         )
         assert response.status_code == 200
         # Partial não deve conter doctype ou html completo
