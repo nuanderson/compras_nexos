@@ -34,11 +34,12 @@ Sistema de gestão de compras para empresa de pequeno porte (até 20 usuários).
 - Atualização de quantidade inline via HTMX com proteção contra concorrência (select_for_update)
 - Visão consolidada de estoque para Comprador/Admin
 
-### 🔜 Fase 4 — Cotações (RFQ)
-- RFQ vinculado a requisição aprovada
-- Registro de propostas de múltiplos fornecedores
-- Comparativo automático com destaque do menor preço
-- Seleção de vencedor com justificativa obrigatória (imutável)
+### ✅ Fase 4 — Cotações (RFQ)
+- RFQ vinculado a requisição aprovada (OneToOne, unicidade no DB)
+- Registro de propostas de múltiplos fornecedores com preço unitário, prazo e condições
+- Comparativo automático de preços com destaque do menor preço e delta percentual
+- Seleção de vencedor com justificativa obrigatória e imutabilidade pós-seleção
+- Acesso restrito a Comprador e Admin via CompradorRequiredMixin
 
 ### 🔜 Fase 5 — Relatórios & Dashboard
 - KPIs em tempo real: requisições, cotações, gasto do mês, fornecedores
@@ -98,6 +99,7 @@ compras_nexos/
 │   ├── accounts/        # Usuários, perfis, unidades organizacionais
 │   ├── aprovacoes/      # Fluxo de aprovação, logs de auditoria, alçadas
 │   ├── core/            # Models base (TimestampedModel, AuditedModel)
+│   ├── cotacoes/        # RFQ: criar processo, cotações de fornecedores, comparativo, vencedor
 │   ├── estoque/         # Itens de estoque por unidade, UnidadeMedida
 │   ├── fornecedores/    # Cadastro de fornecedores com validação CNPJ
 │   └── requisicoes/     # Requisições de compra
@@ -118,5 +120,5 @@ compras_nexos/
 | 1 | Fundação | ✅ Completa |
 | 2 | Requisições & Aprovações | ✅ Completa |
 | 3 | Fornecedores & Estoque | ✅ Completa |
-| 4 | Cotações (RFQ) | 🔜 Pendente |
+| 4 | Cotações (RFQ) | ✅ Completa |
 | 5 | Relatórios & Dashboard | 🔜 Pendente |
