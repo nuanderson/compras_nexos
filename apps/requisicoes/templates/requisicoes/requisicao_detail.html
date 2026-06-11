@@ -29,7 +29,7 @@
       <span id="status-badge-container"
             hx-get="{% url 'requisicoes:status' requisicao.pk %}"
             hx-trigger="every 15s"
-            hx-swap="outerHTML">
+            hx-swap="innerHTML">
         {% include "requisicoes/partials/status_badge.html" %}
       </span>
     </dd>
