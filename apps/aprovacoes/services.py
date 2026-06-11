@@ -232,7 +232,9 @@ def _notificar_gestores(requisicao_pk: int) -> None:
     if not destinatarios:
         return  # falha silenciosa (D-07)
 
-    assunto = f"[ComprasNexos] Nova requisicao aguardando aprovacao -- {req.descricao[:50]}"
+    # WR-06: sanitizar descricao para evitar injecao de headers de e-mail via \n ou \r
+    descricao_safe = req.descricao[:50].replace('\n', ' ').replace('\r', ' ')
+    assunto = f"[ComprasNexos] Nova requisicao aguardando aprovacao -- {descricao_safe}"
     solicitante_nome = req.criado_por.get_full_name() or req.criado_por.email
     corpo = "\n".join([
         "Prezado(a) Gestor(a),",
