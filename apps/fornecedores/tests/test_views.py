@@ -11,6 +11,7 @@ from apps.fornecedores.models import Fornecedor
 from apps.requisicoes.models import CategoriaCompra
 
 
+@pytest.mark.django_db
 class TestListaFornecedoresView:
     """FORN-05 — listagem e controle de acesso."""
 
@@ -70,6 +71,7 @@ class TestListaFornecedoresView:
         assert "Empresa Teste Ltda" in content
 
 
+@pytest.mark.django_db
 class TestCadastrarFornecedorView:
     """FORN-01 — cadastro de fornecedor."""
 
@@ -117,6 +119,7 @@ class TestCadastrarFornecedorView:
         assert response.status_code == 403
 
 
+@pytest.mark.django_db
 class TestToggleAtivoView:
     """FORN-04 — toggle de ativo/inativo sem deleção."""
 

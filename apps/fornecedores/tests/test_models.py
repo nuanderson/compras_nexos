@@ -27,6 +27,7 @@ def fornecedor(db, categoria):
     )
 
 
+@pytest.mark.django_db
 class TestFornecedorModel:
     """FORN-01 — Campos e persistência."""
 
@@ -62,6 +63,7 @@ class TestFornecedorModel:
         assert f.telefone == ""
 
 
+@pytest.mark.django_db
 class TestFornecedorCategoriaProtect:
     """FORN-03 — FK CategoriaCompra com PROTECT (D-01)."""
 
