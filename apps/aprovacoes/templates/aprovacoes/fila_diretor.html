@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_title %}Fila de Aprovacao — Diretoria{% endblock %}
+{% block content %}
+  <div id="modal-container"></div>
+
+  {% if requisicoes %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Solicitante</th>
+            <th>Unidade</th>
+            <th>Descricao</th>
+            <th>Categoria</th>
+            <th>Valor Estimado</th>
+            <th>Data</th>
+            <th>Acoes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in requisicoes %}
+            {% include "aprovacoes/partials/fila_diretor_row.html" with req=r %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="text-align:center">
+      <p style="font-size:20px;font-weight:600;">Nenhuma requisicao aguardando aprovacao da diretoria.</p>
+      <p class="text-muted">Quando uma requisicao for encaminhada ao segundo nivel, ela aparecera aqui.</p>
+    </div>
+  {% endif %}
+{% endblock %}
