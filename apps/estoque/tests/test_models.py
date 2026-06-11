@@ -16,8 +16,8 @@ from apps.estoque.models import ItemEstoque, UnidadeMedida
 @pytest.mark.django_db
 class TestUnidadeMedida:
     def test_str_retorna_nome_e_sigla(self, db):
-        um = UnidadeMedida.objects.create(nome="Unidade", sigla="UN")
-        assert str(um) == "Unidade (UN)"
+        um = UnidadeMedida.objects.create(nome="Unidade Teste Str", sigla="UT_STR")
+        assert str(um) == "Unidade Teste Str (UT_STR)"
 
 
 @pytest.mark.django_db
