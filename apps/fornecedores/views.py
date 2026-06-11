@@ -169,7 +169,7 @@ class ToggleAtivoView(CompradorRequiredMixin, View):
     def post(self, request, pk):
         fornecedor = get_object_or_404(Fornecedor, pk=pk)
         fornecedor.ativo = not fornecedor.ativo
-        fornecedor.save(update_fields=["ativo"])
+        fornecedor.save(update_fields=["ativo", "atualizado_em"])
         return render(
             request,
             "fornecedores/partials/fornecedor_row.html",
