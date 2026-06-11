@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block page_title %}Cotações{% endblock %}
+{% block page_actions %}
+  <a href="{% url 'cotacoes:nova' %}" class="btn btn-primary">Nova Cotação</a>
+{% endblock %}
+{% block content %}
+  {% if rfqs %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>RFQ</th>
+            <th>Requisição</th>
+            <th>Status</th>
+            <th>Criado em</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for rfq in rfqs %}
+          <tr>
+            <td>#{{ rfq.pk }}</td>
+            <td>{{ rfq.requisicao.descricao|truncatechars:50 }}</td>
+            <td>
+              {% if rfq.tem_vencedor %}
+                <span class="badge" style="background-color:#e94560;color:#fff;">Encerrado</span>
+              {% else %}
+                <span class="badge">Em andamento</span>
+              {% endif %}
+            </td>
+            <td>{{ rfq.criado_em|date:"d/m/Y" }}</td>
+            <td>
+              <a href="{% url 'cotacoes:detalhe' rfq.pk %}" class="btn btn-secondary" style="font-size:0.85rem;padding:4px 10px;">Ver</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="text-align:center">
+      <p style="font-size:20px;font-weight:600;">Nenhuma cotação criada ainda.</p>
+      <p class="text-muted">Clique em "Nova Cotação" para iniciar um processo de cotação.</p>
+    </div>
+  {% endif %}
+{% endblock %}

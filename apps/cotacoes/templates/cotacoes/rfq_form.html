@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block page_title %}Nova Cotação{% endblock %}
+{% block content %}
+  <div class="card" style="max-width:720px;">
+    <p class="text-muted" style="margin-bottom:1rem;">Selecione uma requisição aprovada para iniciar a cotação.</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="form-label" for="{{ form.requisicao.id_for_label }}">
+          {{ form.requisicao.label }}{% if form.requisicao.field.required %} *{% endif %}
+        </label>
+        {{ form.requisicao }}
+        {% for error in form.requisicao.errors %}
+          <p class="form-error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Criar RFQ</button>
+        <a href="{% url 'cotacoes:lista' %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

@@ -52,9 +52,9 @@
         {% endif %}
 
         <!-- Cotações — comprador + admin only -->
-        {% if request.user.role == 'comprador' or request.user.role == 'admin' %}
-        <a href="#"
-           class="nav-item">
+        {% if request.user.role == 'comprador' or request.user.role == 'admin' or request.user.is_superuser %}
+        <a href="{% url 'cotacoes:lista' %}"
+           class="nav-item {% if 'cotacoes' in request.path %}is-active{% endif %}">
           Cotações
         </a>
         {% endif %}
