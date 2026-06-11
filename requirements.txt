@@ -6,3 +6,4 @@ whitenoise
 gunicorn
 python-decouple
 django-anymail[amazon_ses]
+python-stdnum==2.2
