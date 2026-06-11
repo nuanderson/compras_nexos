@@ -104,7 +104,7 @@ class ListaFornecedoresView(CompradorRequiredMixin, View):
             "categoria_pk": categoria_pk,
             "mostrar_inativos": mostrar_inativos,
         }
-        if request.htmx:
+        if getattr(request, "htmx", None) and getattr(request.htmx, "target", None) == "fornecedores-list":
             return render(request, "fornecedores/partials/fornecedor_list.html", ctx)
         return render(request, "fornecedores/lista.html", ctx)
 
