@@ -10,7 +10,7 @@
 ## Phases
 
 - [x] **Phase 1: Foundation** - Custom user model, login, unit management — database and auth foundation (completed 2026-06-10)
-- [ ] **Phase 2: Requisitions & Approvals** - Full purchase requisition workflow with configurable 2-level approval
+- [x] **Phase 2: Requisitions & Approvals** - Full purchase requisition workflow with configurable 2-level approval (completed 2026-06-11)
 - [ ] **Phase 3: Suppliers & Inventory** - Supplier directory with CNPJ validation and per-unit stock management
 - [ ] **Phase 4: Quotations (RFQ)** - RFQ creation, multi-supplier quote entry, price comparison, winner selection
 - [ ] **Phase 5: Reports & Dashboard** - Cross-app KPI dashboard, spending reports, and PDF export
@@ -58,7 +58,7 @@ Plans:
   4. Every approval/rejection event is recorded with actor, timestamp, and reason — visible to the Solicitante on their requisition detail page
   5. Admin can configure approval thresholds by value via the admin panel without a code deployment
 
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans complete
 **Wave 1**
 
 - [x] 02-01-PLAN.md — Fundação de dados: 2 apps (requisicoes, aprovacoes), 4 modelos, Django admin, badges CSS, scaffold de testes
@@ -73,7 +73,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 02-04-PLAN.md — Slice do Diretor: fila 2º nível (todas as unidades), aprovar/reprovar, reprovação permanente
+- [x] 02-04-PLAN.md — Slice do Diretor: fila 2º nível (todas as unidades), aprovar/reprovar, reprovação permanente
 
 **UI hint:** yes
 
@@ -139,7 +139,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
-| 2. Requisitions & Approvals | 3/4 | In Progress|  |
+| 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 0/? | Not started | - |
 | 4. Quotations (RFQ) | 0/? | Not started | - |
 | 5. Reports & Dashboard | 0/? | Not started | - |
