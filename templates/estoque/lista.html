@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Estoque | ComprasNexos{% endblock %}
+
+{% block page_title %}Meu Estoque{% endblock %}
+
+{% block page_actions %}
+  <a href="{% url 'estoque:cadastrar' %}" class="btn btn-primary">Novo Item</a>
+  {% if request.user.role == 'comprador' or request.user.role == 'admin' or request.user.is_superuser %}
+  <a href="{% url 'estoque:consolidado' %}" class="btn btn-secondary">Visão Consolidada</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  {% if itens %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Unidade de Medida</th>
+        <th>Quantidade Atual</th>
+        <th>Mínimo</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in itens %}
+      <tr id="item-{{ item.pk }}" {% if item.abaixo_do_minimo %}class="abaixo-minimo"{% endif %}>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.unidade_medida }}</td>
+        <td>{{ item.quantidade_atual }}</td>
+        <td>{{ item.quantidade_minima }}</td>
+        <td>
+          {% if item.abaixo_do_minimo %}
+            <span class="badge badge-danger">Abaixo do mínimo</span>
+          {% else %}
+            <span class="badge badge-success">Normal</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{% url 'estoque:editar' item.pk %}" class="btn btn-sm btn-secondary">Editar</a>
+          <button
+            class="btn btn-sm btn-accent"
+            hx-get="{% url 'estoque:atualizar-quantidade' item.pk %}"
+            hx-target="#quantidade-modal"
+            hx-swap="innerHTML"
+          >
+            Atualizar Qtd
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">
+    <p>Nenhum item de estoque cadastrado.</p>
+    <a href="{% url 'estoque:cadastrar' %}" class="btn btn-primary">Cadastrar primeiro item</a>
+  </div>
+  {% endif %}
+</div>
+
+<div id="quantidade-modal"></div>
+
+<style>
+  .abaixo-minimo {
+    background-color: rgba(233, 69, 96, 0.15);
+  }
+  .badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  .badge-danger {
+    background-color: #e94560;
+    color: #fff;
+  }
+  .badge-success {
+    background-color: #0f9b58;
+    color: #fff;
+  }
+</style>
+{% endblock %}

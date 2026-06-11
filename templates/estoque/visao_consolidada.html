@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Estoque Consolidado | ComprasNexos{% endblock %}
+
+{% block page_title %}Estoque Consolidado — Todas as Unidades{% endblock %}
+
+{% block page_actions %}
+  <a href="{% url 'estoque:lista' %}" class="btn btn-secondary">Meu Estoque</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  {% if itens %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Unidade</th>
+        <th>Nome</th>
+        <th>Unidade de Medida</th>
+        <th>Quantidade Atual</th>
+        <th>Mínimo</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in itens %}
+      <tr {% if item.abaixo_do_minimo %}class="abaixo-minimo"{% endif %}>
+        <td>{{ item.unidade_organizacional }}</td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.unidade_medida }}</td>
+        <td>{{ item.quantidade_atual }}</td>
+        <td>{{ item.quantidade_minima }}</td>
+        <td>
+          {% if item.abaixo_do_minimo %}
+            <span class="badge badge-danger">Abaixo do mínimo</span>
+          {% else %}
+            <span class="badge badge-success">Normal</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">
+    <p>Nenhum item de estoque cadastrado em nenhuma unidade.</p>
+  </div>
+  {% endif %}
+</div>
+
+<style>
+  .abaixo-minimo {
+    background-color: rgba(233, 69, 96, 0.15);
+  }
+  .badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  .badge-danger {
+    background-color: #e94560;
+    color: #fff;
+  }
+  .badge-success {
+    background-color: #0f9b58;
+    color: #fff;
+  }
+</style>
+{% endblock %}

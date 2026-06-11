@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "apps.requisicoes",
     "apps.aprovacoes",
     "apps.fornecedores",
+    "apps.estoque",
 ]
 
 MIDDLEWARE = [

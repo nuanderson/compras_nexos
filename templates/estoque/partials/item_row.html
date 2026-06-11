@@ -1,0 +1,41 @@
+{% comment %}
+Partial de linha de item de estoque para swap HTMX (AtualizarQuantidadeView).
+{% endcomment %}
+<tr id="item-{{ item.pk }}" {% if item.abaixo_do_minimo %}class="abaixo-minimo"{% endif %}>
+  <td>{{ item.nome }}</td>
+  <td>{{ item.unidade_medida }}</td>
+  <td>{{ item.quantidade_atual }}</td>
+  <td>{{ item.quantidade_minima }}</td>
+  <td>
+    {% if item.abaixo_do_minimo %}
+      <span class="badge badge-danger">Abaixo do mínimo</span>
+    {% else %}
+      <span class="badge badge-success">Normal</span>
+    {% endif %}
+  </td>
+  <td>
+    <a href="{% url 'estoque:editar' item.pk %}" class="btn btn-sm btn-secondary">Editar</a>
+    <form
+      hx-post="{% url 'estoque:atualizar-quantidade' item.pk %}"
+      hx-target="#item-{{ item.pk }}"
+      hx-swap="outerHTML"
+      style="display:inline;"
+    >
+      {% csrf_token %}
+      <input
+        type="number"
+        name="quantidade_atual"
+        value="{{ item.quantidade_atual }}"
+        min="0"
+        style="width:80px;"
+        class="form-control form-control-sm d-inline"
+      >
+      {% if form %}
+        {% for error in form.quantidade_atual.errors %}
+          <span class="text-danger" style="font-size:0.8rem;">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+      <button type="submit" class="btn btn-sm btn-accent">Salvar</button>
+    </form>
+  </td>
+</tr>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo }} | ComprasNexos{% endblock %}
+
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block page_actions %}
+  <a href="{% url 'estoque:lista' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px;">
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+      {{ form.nome }}
+      {% if form.nome.errors %}
+        <div class="form-error">
+          {% for error in form.nome.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.unidade_medida.id_for_label }}">{{ form.unidade_medida.label }}</label>
+      {{ form.unidade_medida }}
+      {% if form.unidade_medida.errors %}
+        <div class="form-error">
+          {% for error in form.unidade_medida.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.quantidade_atual.id_for_label }}">{{ form.quantidade_atual.label }}</label>
+      {{ form.quantidade_atual }}
+      {% if form.quantidade_atual.errors %}
+        <div class="form-error">
+          {% for error in form.quantidade_atual.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.quantidade_minima.id_for_label }}">{{ form.quantidade_minima.label }}</label>
+      {{ form.quantidade_minima }}
+      {% if form.quantidade_minima.errors %}
+        <div class="form-error">
+          {% for error in form.quantidade_minima.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{% url 'estoque:lista' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
