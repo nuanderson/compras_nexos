@@ -1,0 +1,34 @@
+{# Modal de seleção de vencedor do RFQ (COT-04, D-07) #}
+{# Contexto esperado: rfq, cotacao (CotacaoFornecedor) #}
+<div class="card" style="margin-bottom:16px;border-color:#e94560;">
+  <p style="font-size:14px;margin-bottom:8px;">
+    <strong>Selecionar vencedor:</strong> {{ cotacao.fornecedor.razao_social }} — R$ {{ cotacao.preco_unitario|floatformat:2 }}
+  </p>
+  <p style="font-size:13px;color:var(--text-muted,#888);margin-bottom:12px;">
+    A seleção é <strong>imutável</strong> após confirmada. Justifique sua escolha.
+  </p>
+  <form
+    hx-post="{% url 'cotacoes:selecionar-vencedor' rfq.pk cotacao.pk %}"
+    hx-target="body"
+    hx-swap="none">
+    {% csrf_token %}
+    <div class="form-group" style="margin-bottom:12px;">
+      <label class="form-label" for="id_justificativa">Justificativa *</label>
+      <textarea
+        name="justificativa"
+        id="id_justificativa"
+        rows="3"
+        required
+        class="form-input"
+        style="width:100%;resize:vertical;"
+        placeholder="Descreva o motivo da escolha deste fornecedor..."></textarea>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button type="submit" class="btn btn-primary">Confirmar Seleção</button>
+      <button
+        type="button"
+        onclick="document.getElementById('modal-container').innerHTML=''"
+        class="btn btn-secondary">Cancelar</button>
+    </div>
+  </form>
+</div>
