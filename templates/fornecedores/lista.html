@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load fornecedor_tags %}
+
+{% block title %}Fornecedores — ComprasNexos{% endblock %}
+
+{% block page_title %}Fornecedores{% endblock %}
+
+{% block page_actions %}
+  <a href="{% url 'fornecedores:cadastrar' %}" class="btn btn-primary">
+    Novo Fornecedor
+  </a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <!-- Barra de busca e filtro de categoria -->
+  <div class="filter-bar" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-end;">
+    <div style="flex: 1;">
+      <label for="busca-fornecedor" style="display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: #aaa;">
+        Buscar
+      </label>
+      <input
+        id="busca-fornecedor"
+        type="search"
+        name="q"
+        value="{{ q }}"
+        placeholder="Buscar por nome ou CNPJ..."
+        autocomplete="off"
+        hx-get="{% url 'fornecedores:lista' %}"
+        hx-trigger="input delay:300ms, search"
+        hx-target="#fornecedores-list"
+        hx-swap="innerHTML"
+        hx-include="[name='categoria']"
+        style="width: 100%; padding: 0.5rem 0.75rem; background: #16213e; border: 1px solid #2a2a4a; color: #e0e0e0; border-radius: 4px;"
+      >
+    </div>
+
+    <div style="min-width: 200px;">
+      <label for="filtro-categoria" style="display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: #aaa;">
+        Categoria
+      </label>
+      <select
+        id="filtro-categoria"
+        name="categoria"
+        hx-get="{% url 'fornecedores:lista' %}"
+        hx-trigger="change"
+        hx-target="#fornecedores-list"
+        hx-swap="innerHTML"
+        hx-include="[name='q']"
+        style="width: 100%; padding: 0.5rem 0.75rem; background: #16213e; border: 1px solid #2a2a4a; color: #e0e0e0; border-radius: 4px;"
+      >
+        <option value="">Todas as categorias</option>
+        {% for cat in categorias %}
+          <option value="{{ cat.pk }}" {% if categoria_pk == cat.pk|stringformat:"s" %}selected{% endif %}>
+            {{ cat.nome }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <!-- Lista de fornecedores (alvo do HTMX) -->
+  <div id="fornecedores-list">
+    {% include "fornecedores/partials/fornecedor_list.html" %}
+  </div>
+</div>
+{% endblock %}

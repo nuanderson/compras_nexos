@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo }} — ComprasNexos{% endblock %}
+
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block page_actions %}
+  <a href="{% url 'fornecedores:lista' %}" style="color: #aaa; text-decoration: none; font-size: 0.9rem;">
+    &larr; Voltar para lista
+  </a>
+{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 640px;">
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div style="margin-bottom: 1.25rem;">
+      <label
+        for="{{ field.id_for_label }}"
+        style="display: block; margin-bottom: 0.4rem; font-size: 0.9rem; color: #ccc;"
+      >
+        {{ field.label }}
+        {% if field.field.required %}<span style="color: #e94560;">*</span>{% endif %}
+      </label>
+      {{ field }}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <p style="color: #e94560; font-size: 0.85rem; margin-top: 0.3rem;">{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+      {% if field.help_text %}
+        <p style="color: #888; font-size: 0.8rem; margin-top: 0.3rem;">{{ field.help_text }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <div style="margin-bottom: 1.25rem; color: #e94560;">
+      {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="background: #e94560; border: none; color: white; padding: 0.6rem 1.5rem; border-radius: 4px; cursor: pointer; font-size: 0.95rem;"
+      >
+        Salvar
+      </button>
+      <a
+        href="{% url 'fornecedores:lista' %}"
+        style="padding: 0.6rem 1.5rem; border: 1px solid #2a2a4a; color: #aaa; border-radius: 4px; text-decoration: none; font-size: 0.95rem;"
+      >
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}
