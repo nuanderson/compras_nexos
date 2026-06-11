@@ -53,7 +53,7 @@ def get_queryset_fornecedores(q=None, categoria_pk=None):
     - q truncado a 100 chars (T-03-04 — DoS guard).
     - TrigramSimilarity nunca chamado com q vazio (Pitfall 2 do RESEARCH.md).
     """
-    qs = Fornecedor.objects.select_related("categoria")
+    qs = Fornecedor.objects.select_related("categoria").filter(ativo=True)
 
     if categoria_pk:
         qs = qs.filter(categoria_id=categoria_pk)
