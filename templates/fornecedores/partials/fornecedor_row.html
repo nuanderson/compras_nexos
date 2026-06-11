@@ -15,14 +15,22 @@
        style="color: #e94560; text-decoration: none; margin-right: 0.75rem;">
       Editar
     </a>
-    <button
+    <form
+      method="post"
+      action="{% url 'fornecedores:toggle-ativo' fornecedor.pk %}"
       hx-post="{% url 'fornecedores:toggle-ativo' fornecedor.pk %}"
       hx-target="#fornecedor-{{ fornecedor.pk }}"
       hx-swap="outerHTML"
       hx-confirm="Confirmar alteração de status?"
-      style="background: none; border: 1px solid #2a2a4a; color: #aaa; padding: 0.25rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;"
+      style="display:inline;"
     >
-      {% if fornecedor.ativo %}Inativar{% else %}Reativar{% endif %}
-    </button>
+      {% csrf_token %}
+      <button
+        type="submit"
+        style="background: none; border: 1px solid #2a2a4a; color: #aaa; padding: 0.25rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;"
+      >
+        {% if fornecedor.ativo %}Inativar{% else %}Reativar{% endif %}
+      </button>
+    </form>
   </td>
 </tr>
