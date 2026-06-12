@@ -19,7 +19,7 @@
 - [x] **UNIT-01**: Admin cadastra unidades (nome, descrição, status ativo/inativo)
 - [x] **UNIT-02**: Admin vincula usuários a unidades
 - [x] **UNIT-03**: Usuário tem unidade padrão pré-selecionada ao abrir requisição, mas pode alterá-la
-- [ ] **UNIT-04**: Relatórios podem ser filtrados por unidade
+- [x] **UNIT-04**: Relatórios podem ser filtrados por unidade
 
 ### Requisições de Compra
 
@@ -66,7 +66,7 @@
 - [ ] **REL-01**: Dashboard exibe KPIs: requisições abertas, cotações em andamento, gasto do mês e fornecedores ativos
 - [ ] **REL-02**: Relatório de gasto por categoria e período, filtrável por unidade
 - [ ] **REL-03**: Painel de status de todas as requisições com filtro por status e unidade
-- [ ] **REL-04**: Relatórios podem ser exportados em PDF com layout formatado via ReportLab
+- [x] **REL-04**: Relatórios podem ser exportados em PDF com layout formatado via ReportLab
 
 ---
 
@@ -160,8 +160,8 @@ Mapeamento atualizado após criação do roadmap — 2026-06-10.
 | REL-01 | Phase 5 | Reports & Dashboard | Pending |
 | REL-02 | Phase 5 | Reports & Dashboard | Pending |
 | REL-03 | Phase 5 | Reports & Dashboard | Pending |
-| REL-04 | Phase 5 | Reports & Dashboard | Pending |
-| UNIT-04 | Phase 5 | Reports & Dashboard | Pending |
+| REL-04 | Phase 5 | Reports & Dashboard | Delivered (05-03) |
+| UNIT-04 | Phase 5 | Reports & Dashboard | Delivered (05-02) |
 
 **Coverage:**
 

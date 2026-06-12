@@ -165,7 +165,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 05-03-PLAN.md — Endpoints PDF (ReportLab Platypus) para gastos e requisições, mesmos filtros das views web (REL-04)
+- [x] 05-03-PLAN.md — Endpoints PDF (ReportLab Platypus) para gastos e requisições, mesmos filtros das views web (REL-04)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
