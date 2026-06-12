@@ -41,10 +41,13 @@ Sistema de gestão de compras para empresa de pequeno porte (até 20 usuários).
 - Seleção de vencedor com justificativa obrigatória e imutabilidade pós-seleção
 - Acesso restrito a Comprador e Admin via CompradorRequiredMixin
 
-### 🔜 Fase 5 — Relatórios & Dashboard
-- KPIs em tempo real: requisições, cotações, gasto do mês, fornecedores
-- Relatório de gasto por categoria e período com filtro por unidade
-- Exportação em PDF via ReportLab
+### ✅ Fase 5 — Relatórios & Dashboard
+- Dashboard com KPIs reais: requisições abertas, cotações em andamento, gasto do mês e fornecedores ativos
+- Relatório de gasto por categoria filtrável por período e unidade organizacional
+- Painel de status de requisições com filtro por período e unidade
+- Exportação em PDF de ambos os relatórios via ReportLab (layouts tabulares com cabeçalho e rodapé)
+- Acesso restrito a `/relatorios/*`: Comprador, Diretor e Admin (Solicitante e Gestor não têm acesso)
+- Dashboard acessível a todos os perfis autenticados
 
 ---
 
@@ -98,10 +101,11 @@ compras_nexos/
 ├── apps/
 │   ├── accounts/        # Usuários, perfis, unidades organizacionais
 │   ├── aprovacoes/      # Fluxo de aprovação, logs de auditoria, alçadas
-│   ├── core/            # Models base (TimestampedModel, AuditedModel)
+│   ├── core/            # Dashboard com KPIs reais, models base (TimestampedModel, AuditedModel)
 │   ├── cotacoes/        # RFQ: criar processo, cotações de fornecedores, comparativo, vencedor
 │   ├── estoque/         # Itens de estoque por unidade, UnidadeMedida
 │   ├── fornecedores/    # Cadastro de fornecedores com validação CNPJ
+│   ├── relatorios/      # Relatórios de gastos e requisições, exportação PDF (ReportLab)
 │   └── requisicoes/     # Requisições de compra
 ├── config/              # Settings (base, dev, prod), URLs, WSGI
 ├── static/              # CSS, HTMX vendorizado
@@ -121,4 +125,4 @@ compras_nexos/
 | 2 | Requisições & Aprovações | ✅ Completa |
 | 3 | Fornecedores & Estoque | ✅ Completa |
 | 4 | Cotações (RFQ) | ✅ Completa |
-| 5 | Relatórios & Dashboard | 🔜 Pendente |
+| 5 | Relatórios & Dashboard | ✅ Completa |
