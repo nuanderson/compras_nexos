@@ -25,14 +25,14 @@ from datetime import date, datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
+from django.http import FileResponse
 from django.shortcuts import render
 from django.views import View
 
 from apps.accounts.models import UnidadeOrganizacional
 from apps.requisicoes.models import Requisicao
 
-from . import services
+from . import pdf, services
 
 
 class RelatorioRequiredMixin(LoginRequiredMixin):
@@ -149,25 +149,34 @@ class RequisicoesPainelView(RelatorioRequiredMixin, View):
 
 class GastosPDFView(RelatorioRequiredMixin, View):
     """
-    STUB — corpo real do PDF implementado em 05-03.
+    Exporta o relatório de Gastos por Categoria em PDF.
 
-    Existe aqui para destravar o registro das URLs (urls.py importa esta classe).
-    Retorna HTTP 501 Not Implemented ate que 05-03 substitua este metodo.
+    Reutiliza os mesmos filtros GET da GastosView (_parse_filtros) e o mesmo
+    service layer (get_gastos_por_categoria) — D-06, D-07, REL-04.
+    Gera o PDF via ReportLab Platypus (pdf.build_gastos_pdf) e serve como
+    download com Content-Disposition: attachment (T-05-07, T-05-08, T-05-09).
     """
 
     def get(self, request):
-        # STUB — corpo real do PDF implementado em 05-03
-        return HttpResponse(status=501)
+        data_inicio, data_fim, unidade_id = _parse_filtros(request)
+        dados = services.get_gastos_por_categoria(data_inicio, data_fim, unidade_id)
+        buffer = pdf.build_gastos_pdf(dados, data_inicio.isoformat(), data_fim.isoformat())
+        return FileResponse(buffer, as_attachment=True, filename="gastos_por_categoria.pdf")
 
 
 class RequisicoesPDFView(RelatorioRequiredMixin, View):
     """
-    STUB — corpo real do PDF implementado em 05-03.
+    Exporta o Painel de Status de Requisições em PDF.
 
-    Existe aqui para destravar o registro das URLs (urls.py importa esta classe).
-    Retorna HTTP 501 Not Implemented ate que 05-03 substitua este metodo.
+    Reutiliza os mesmos filtros GET da RequisicoesPainelView (status, unidade) e
+    o mesmo service layer (get_requisicoes_painel) — D-06, D-07, REL-04.
+    Gera o PDF via ReportLab Platypus (pdf.build_requisicoes_pdf) e serve como
+    download com Content-Disposition: attachment (T-05-07, T-05-08, T-05-09).
     """
 
     def get(self, request):
-        # STUB — corpo real do PDF implementado em 05-03
-        return HttpResponse(status=501)
+        status = request.GET.get("status", "") or None
+        unidade_id = request.GET.get("unidade", "") or None
+        requisicoes = services.get_requisicoes_painel(status, unidade_id)
+        buffer = pdf.build_requisicoes_pdf(requisicoes)
+        return FileResponse(buffer, as_attachment=True, filename="painel_requisicoes.pdf")
