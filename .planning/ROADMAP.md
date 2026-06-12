@@ -13,7 +13,7 @@
 - [x] **Phase 2: Requisitions & Approvals** - Full purchase requisition workflow with configurable 2-level approval (completed 2026-06-11)
 - [x] **Phase 3: Suppliers & Inventory** - Supplier directory with CNPJ validation and per-unit stock management (completed 2026-06-11)
 - [x] **Phase 4: Quotations (RFQ)** - RFQ creation, multi-supplier quote entry, price comparison, winner selection (completed 2026-06-11)
-- [ ] **Phase 5: Reports & Dashboard** - Cross-app KPI dashboard, spending reports, and PDF export
+- [x] **Phase 5: Reports & Dashboard** - Cross-app KPI dashboard, spending reports, and PDF export (completed 2026-06-12)
 
 ---
 
@@ -169,7 +169,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 05-04-PLAN.md — Link de navegação Relatórios + validação da suíte completa + README de encerramento
+- [x] 05-04-PLAN.md — Link de navegação Relatórios + validação da suíte completa + README de encerramento
 
 **UI hint:** yes
 
@@ -183,7 +183,7 @@ Plans:
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
 | 4. Quotations (RFQ) | 4/4 | Complete    | 2026-06-12 |
-| 5. Reports & Dashboard | 2/4 | In progress | - |
+| 5. Reports & Dashboard | 4/4 | Complete    | 2026-06-12 |
 
 ---
 

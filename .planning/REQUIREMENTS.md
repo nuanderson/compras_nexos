@@ -63,9 +63,9 @@
 
 ### Relatórios
 
-- [ ] **REL-01**: Dashboard exibe KPIs: requisições abertas, cotações em andamento, gasto do mês e fornecedores ativos
-- [ ] **REL-02**: Relatório de gasto por categoria e período, filtrável por unidade
-- [ ] **REL-03**: Painel de status de todas as requisições com filtro por status e unidade
+- [x] **REL-01**: Dashboard exibe KPIs: requisições abertas, cotações em andamento, gasto do mês e fornecedores ativos
+- [x] **REL-02**: Relatório de gasto por categoria e período, filtrável por unidade
+- [x] **REL-03**: Painel de status de todas as requisições com filtro por status e unidade
 - [x] **REL-04**: Relatórios podem ser exportados em PDF com layout formatado via ReportLab
 
 ---
@@ -157,9 +157,9 @@ Mapeamento atualizado após criação do roadmap — 2026-06-10.
 | COT-02 | Phase 4 | Quotations (RFQ) | Pending |
 | COT-03 | Phase 4 | Quotations (RFQ) | Pending |
 | COT-04 | Phase 4 | Quotations (RFQ) | Pending |
-| REL-01 | Phase 5 | Reports & Dashboard | Pending |
-| REL-02 | Phase 5 | Reports & Dashboard | Pending |
-| REL-03 | Phase 5 | Reports & Dashboard | Pending |
+| REL-01 | Phase 5 | Reports & Dashboard | Delivered (05-01) |
+| REL-02 | Phase 5 | Reports & Dashboard | Delivered (05-02) |
+| REL-03 | Phase 5 | Reports & Dashboard | Delivered (05-02) |
 | REL-04 | Phase 5 | Reports & Dashboard | Delivered (05-03) |
 | UNIT-04 | Phase 5 | Reports & Dashboard | Delivered (05-02) |
 
