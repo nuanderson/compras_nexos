@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-12T02:56:46Z"
+last_updated: "2026-06-12T03:15:00Z"
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 18
-  completed_plans: 15
-  percent: 83
+  completed_plans: 16
+  percent: 89
 ---
 
 # State: ComprasNexos
@@ -27,14 +27,14 @@ progress:
 ## Current Position
 
 Phase: 5 (reports-dashboard) — EXECUTING
-Plan: 2 of 4
-Next: Execute Phase 05 Plan 02
+Plan: 3 of 4
+Next: Execute Phase 05 Plan 03 (PDF endpoints)
 **Phase:** 5
-**Plan:** 1 complete, starting plan 2
+**Plan:** 2 complete, starting plan 3
 **Status:** Executing Phase 5
 
 ```
-Progress: [########--] 83% — Phase 05 in progress (1/4 plans done)
+Progress: [#########-] 89% — Phase 05 in progress (2/4 plans done)
 ```
 
 | Phase | Name | Status |
@@ -61,6 +61,8 @@ Progress: [########--] 83% — Phase 05 in progress (1/4 plans done)
 
 | Decision | Rationale |
 |----------|-----------|
+| RelatorioRequiredMixin independente de CompradorRequiredMixin | Inclui role 'diretor' — D-02, Critical Note 1 do 05-PATTERNS.md |
+| Alias 'gastos' no contexto de GastosView | Test existente verifica 'gastos' in context; plano define 'gastos_por_categoria' — ambas as chaves coexistem |
 | Custom User model in Phase 1 | Cannot change after first migration — must be first |
 | `Categoria` model seeded in Phase 2 | Required as FK target before `Requisicao` can reference it |
 | `RegraDeAlcada` admin config in Phase 2 | Must exist before approval flow can be tested end-to-end |
@@ -108,8 +110,8 @@ None.
 
 ## Session Continuity
 
-**Last action:** Completed Phase 05 Plan 01 — App relatorios scaffold + service layer + DashboardView KPIs reais
-**Next action:** Execute Phase 05 Plan 02 (RelatorioRequiredMixin + GastosView + RequisicoesPainelView)
+**Last action:** Completed Phase 05 Plan 02 — RelatorioRequiredMixin + GastosView + RequisicoesPainelView + URLs + templates com filtros GET
+**Next action:** Execute Phase 05 Plan 03 (endpoints PDF com ReportLab Platypus)
 **Session started:** 2026-06-12
 
 ---

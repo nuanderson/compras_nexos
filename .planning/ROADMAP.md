@@ -161,7 +161,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 05-02-PLAN.md — RelatorioRequiredMixin + GastosView/RequisicoesPainelView + URLs + templates com filtros GET (REL-02, REL-03, UNIT-04)
+- [x] 05-02-PLAN.md — RelatorioRequiredMixin + GastosView/RequisicoesPainelView + URLs + templates com filtros GET (REL-02, REL-03, UNIT-04)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -183,7 +183,7 @@ Plans:
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
 | 4. Quotations (RFQ) | 4/4 | Complete    | 2026-06-12 |
-| 5. Reports & Dashboard | 1/4 | In progress | - |
+| 5. Reports & Dashboard | 2/4 | In progress | - |
 
 ---
 
