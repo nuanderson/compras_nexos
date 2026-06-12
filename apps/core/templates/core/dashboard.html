@@ -7,20 +7,19 @@
 <div class="card-grid">
   <div class="card">
     <div class="card-label">Requisições Abertas</div>
-    <div class="card-value">&mdash;</div>
+    <div class="card-value">{{ kpis.req_abertas }}</div>
   </div>
   <div class="card">
     <div class="card-label">Cotações em Andamento</div>
-    <div class="card-value">&mdash;</div>
+    <div class="card-value">{{ kpis.cotacoes_andamento }}</div>
   </div>
   <div class="card">
     <div class="card-label">Gasto do Mês</div>
-    <div class="card-value">&mdash;</div>
+    <div class="card-value">R$ {{ kpis.gasto_mes|floatformat:2 }}</div>
   </div>
   <div class="card">
     <div class="card-label">Fornecedores Ativos</div>
-    <div class="card-value">&mdash;</div>
+    <div class="card-value">{{ kpis.fornecedores_ativos }}</div>
   </div>
 </div>
-<p class="text-muted mt-lg">Dashboard em construção — dados disponíveis após as fases 2-5.</p>
 {% endblock %}
