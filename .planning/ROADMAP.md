@@ -154,7 +154,23 @@ Plans:
   3. Requisition status panel shows all requisitions with filters for status and unit
   4. Any report can be exported as a formatted PDF (ReportLab Platypus layout) directly from the browser
 
-**Plans:** TBD
+**Plans:** 4 plans
+**Wave 1**
+
+- [ ] 05-01-PLAN.md — App relatorios scaffold + service layer (KPIs/gastos/painel) + scaffold de testes Wave 0 + DashboardView enriquecida com KPIs reais
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 05-02-PLAN.md — RelatorioRequiredMixin + GastosView/RequisicoesPainelView + URLs + templates com filtros GET (REL-02, REL-03, UNIT-04)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 05-03-PLAN.md — Endpoints PDF (ReportLab Platypus) para gastos e requisições, mesmos filtros das views web (REL-04)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
+- [ ] 05-04-PLAN.md — Link de navegação Relatórios + validação da suíte completa + README de encerramento
+
 **UI hint:** yes
 
 ---
@@ -167,7 +183,7 @@ Plans:
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
 | 4. Quotations (RFQ) | 4/4 | Complete    | 2026-06-12 |
-| 5. Reports & Dashboard | 0/? | Not started | - |
+| 5. Reports & Dashboard | 0/4 | In progress | - |
 
 ---
 
@@ -220,4 +236,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-06-10*
-*Last updated: 2026-06-11 — Phase 4 decomposed into 4 plans*
+*Last updated: 2026-06-11 — Phase 5 decomposed into 4 plans*
