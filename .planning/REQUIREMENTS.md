@@ -47,10 +47,10 @@
 
 ### Cotações (RFQ)
 
-- [ ] **COT-01**: Comprador cria RFQ vinculado a uma requisição aprovada (um RFQ por requisição)
-- [ ] **COT-02**: Comprador registra cotações de múltiplos fornecedores com: preço unitário, prazo de entrega e condições de pagamento
-- [ ] **COT-03**: Sistema exibe comparativo de cotações com destaque automático do menor preço e delta percentual entre fornecedores
-- [ ] **COT-04**: Comprador seleciona fornecedor vencedor com justificativa obrigatória (imutável após salvo)
+- [x] **COT-01**: Comprador cria RFQ vinculado a uma requisição aprovada (um RFQ por requisição)
+- [x] **COT-02**: Comprador registra cotações de múltiplos fornecedores com: preço unitário, prazo de entrega e condições de pagamento
+- [x] **COT-03**: Sistema exibe comparativo de cotações com destaque automático do menor preço e delta percentual entre fornecedores
+- [x] **COT-04**: Comprador seleciona fornecedor vencedor com justificativa obrigatória (imutável após salvo)
 
 ### Estoque
 

@@ -12,7 +12,7 @@
 - [x] **Phase 1: Foundation** - Custom user model, login, unit management — database and auth foundation (completed 2026-06-10)
 - [x] **Phase 2: Requisitions & Approvals** - Full purchase requisition workflow with configurable 2-level approval (completed 2026-06-11)
 - [x] **Phase 3: Suppliers & Inventory** - Supplier directory with CNPJ validation and per-unit stock management (completed 2026-06-11)
-- [ ] **Phase 4: Quotations (RFQ)** - RFQ creation, multi-supplier quote entry, price comparison, winner selection
+- [x] **Phase 4: Quotations (RFQ)** - RFQ creation, multi-supplier quote entry, price comparison, winner selection (completed 2026-06-11)
 - [ ] **Phase 5: Reports & Dashboard** - Cross-app KPI dashboard, spending reports, and PDF export
 
 ---
@@ -120,22 +120,22 @@ Plans:
   3. System displays a side-by-side price comparison that automatically highlights the lowest-price quote and shows the percentage delta between each supplier and the winner
   4. Buyer can select a winning supplier with a mandatory written justification; the selection is immutable once saved and the full quote history remains accessible for audit
 
-**Plans:** 4 plans
+**Plans:** 4/4 plans complete
 **Wave 1**
 
-- [ ] 04-01-PLAN.md — Fundacao: app cotacoes, modelos RFQ + CotacaoFornecedor, migracao, service layer (criar/comparativo/selecionar vencedor) e scaffold de testes Wave 0
+- [x] 04-01-PLAN.md — Fundacao: app cotacoes, modelos RFQ + CotacaoFornecedor, migracao, service layer (criar/comparativo/selecionar vencedor) e scaffold de testes Wave 0
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 04-02-PLAN.md — Slice de criacao de RFQ: hub /cotacoes/, NovaRFQView com select filtrado (APROVADO sem RFQ), DetalheRFQView, templates, registro de URLs
+- [x] 04-02-PLAN.md — Slice de criacao de RFQ: hub /cotacoes/, NovaRFQView com select filtrado (APROVADO sem RFQ), DetalheRFQView, templates, registro de URLs
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 04-03-PLAN.md — Slice de cotacoes + comparativo + vencedor: add/remove cotacao via HX-Redirect, tabela comparativa com delta %, modal de selecao imutavel
+- [x] 04-03-PLAN.md — Slice de cotacoes + comparativo + vencedor: add/remove cotacao via HX-Redirect, tabela comparativa com delta %, modal de selecao imutavel
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 04-04-PLAN.md — Navegacao (link Cotacoes no nav) + validacao da suite completa + README
+- [x] 04-04-PLAN.md — Navegacao (link Cotacoes no nav) + validacao da suite completa + README
 
 **UI hint:** yes
 
@@ -166,7 +166,7 @@ Plans:
 | 1. Foundation | 3/3 | Complete    | 2026-06-10 |
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
-| 4. Quotations (RFQ) | 0/4 | Planned | - |
+| 4. Quotations (RFQ) | 4/4 | Complete    | 2026-06-12 |
 | 5. Reports & Dashboard | 0/? | Not started | - |
 
 ---
