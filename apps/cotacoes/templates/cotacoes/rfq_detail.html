@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block page_title %}RFQ #{{ rfq.pk }}{% endblock %}
+{% block page_title %}Cotação #{{ rfq.pk }}{% endblock %}
 {% block page_actions %}
   <a href="{% url 'cotacoes:lista' %}" class="btn btn-secondary">Voltar</a>
 {% endblock %}
 {% block content %}
   <div class="card" style="max-width:900px;margin-bottom:1.5rem;">
     <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
-      <h2 style="margin:0;">RFQ #{{ rfq.pk }}</h2>
+      <h2 style="margin:0;">Cotação #{{ rfq.pk }}</h2>
       {% if rfq.tem_vencedor %}
         <span class="badge" style="background-color:#e94560;color:#fff;">Encerrado</span>
       {% else %}
@@ -82,7 +82,7 @@
             <tr style="border-bottom:2px solid rgba(255,255,255,0.1);">
               <th style="padding:8px 12px;text-align:left;">Fornecedor</th>
               <th style="padding:8px 12px;text-align:left;">Preço Unitário</th>
-              <th style="padding:8px 12px;text-align:left;">Delta %</th>
+              <th style="padding:8px 12px;text-align:left;">Variação %</th>
               <th style="padding:8px 12px;text-align:left;">Prazo</th>
               <th style="padding:8px 12px;text-align:left;">Condições</th>
               <th style="padding:8px 12px;text-align:left;">Observações</th>
