@@ -581,17 +581,17 @@ urlpatterns = [
 
 **Se a tabela acima estiver vazia:** todas as afirmações foram verificadas ou citadas — nenhuma confirmação do usuário necessária. Neste caso, A2 e A3 precisam de validação via testes.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Paginação no painel de requisições (REL-03)**
    - O que sabemos: a view deve retornar "todas as requisições" com filtros.
    - O que não está claro: o CONTEXT não especifica paginação. Para 20 usuários, o volume de requisições dificilmente justificará paginação em v1, mas o planner deve decidir.
-   - Recomendação: implementar sem paginação em v1 (exibir tudo); adicionar paginação se o feedback de QA indicar necessidade.
+   - RESOLVED: implementar sem paginação em v1 (exibir tudo); adicionar paginação se o feedback de QA indicar necessidade.
 
 2. **Acesso ao relatório de gastos para Solicitante**
    - O que sabemos: a nav em `base.html` mostra "Relatórios" apenas para `comprador`, `diretor`, `admin`. O `CompradorRequiredMixin` bloqueia `solicitante`.
    - O que não está claro: o REL-01 diz "All roles can view real-time KPIs" — mas o dashboard é acessível a todos; os relatórios detalhados ficam restritos a comprador/diretor/admin.
-   - Recomendação: manter `CompradorRequiredMixin` para as views de relatório (`/relatorios/*`); o dashboard (`/`) fica acessível a todos via `LoginRequiredMixin` com KPIs filtrados por role. Isso está alinhado com o CONTEXT.md.
+   - RESOLVED: manter `CompradorRequiredMixin` para as views de relatório (`/relatorios/*`); o dashboard (`/`) fica acessível a todos via `LoginRequiredMixin` com KPIs filtrados por role. Isso está alinhado com o CONTEXT.md.
 
 ## Environment Availability
 
