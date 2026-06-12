@@ -73,8 +73,8 @@
           Estoque
         </a>
 
-        <!-- Relatórios — comprador + diretor + admin -->
-        {% if request.user.role == 'comprador' or request.user.role == 'diretor' or request.user.role == 'admin' %}
+        <!-- Relatórios — comprador + diretor + admin + superuser -->
+        {% if request.user.role == 'comprador' or request.user.role == 'diretor' or request.user.role == 'admin' or request.user.is_superuser %}
         <a href="{% url 'relatorios:gastos' %}"
            class="nav-item {% if 'relatorios' in request.path %}is-active{% endif %}">
           Relatórios
