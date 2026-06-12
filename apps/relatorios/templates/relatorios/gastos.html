@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Relatório de Gastos — ComprasNexos{% endblock %}
+{% block page_title %}Gastos por Categoria{% endblock %}
+
+{% block page_actions %}
+<a href="{% url 'relatorios:gastos-pdf' %}?{{ request.GET.urlencode }}" class="btn btn-secondary">Exportar PDF</a>
+{% endblock %}
+
+{% block content %}
+<div class="mb-lg">
+  <form method="get" class="mb-lg">
+    <div class="form-group" style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+      <div>
+        <label class="form-label" for="data_inicio">De</label>
+        <input
+          type="date"
+          id="data_inicio"
+          name="data_inicio"
+          value="{{ data_inicio }}"
+          class="form-input"
+        >
+      </div>
+      <div>
+        <label class="form-label" for="data_fim">Até</label>
+        <input
+          type="date"
+          id="data_fim"
+          name="data_fim"
+          value="{{ data_fim }}"
+          class="form-input"
+        >
+      </div>
+      {% if pode_filtrar_unidade %}
+      <div>
+        <label class="form-label" for="unidade">Unidade</label>
+        <select id="unidade" name="unidade" class="form-select">
+          <option value="">Todas</option>
+          {% for u in unidades %}
+          <option value="{{ u.pk }}"
+            {% if u.pk|stringformat:"s" == unidade_selecionada %}selected{% endif %}>
+            {{ u.nome }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+      <div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Categoria</th>
+        <th>Total (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in gastos_por_categoria %}
+      <tr>
+        <td>{{ row.categoria_nome|default:"Sem categoria" }}</td>
+        <td>R$ {{ row.total|floatformat:2 }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="2" class="text-muted">Nenhum gasto no período.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
