@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-last_updated: "2026-06-12T01:01:12.185Z"
+status: executing
+last_updated: "2026-06-12T02:56:46Z"
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 14
-  completed_plans: 14
-  percent: 80
+  total_plans: 18
+  completed_plans: 15
+  percent: 83
 ---
 
 # State: ComprasNexos
@@ -26,15 +26,15 @@ progress:
 
 ## Current Position
 
-Phase: 04 (quotations-rfq) — EXECUTING
-Plan: 1 of 4
-Next: Phase 03 (Suppliers & Inventory)
+Phase: 5 (reports-dashboard) — EXECUTING
+Plan: 2 of 4
+Next: Execute Phase 05 Plan 02
 **Phase:** 5
-**Plan:** Not started
-**Status:** Ready to plan
+**Plan:** 1 complete, starting plan 2
+**Status:** Executing Phase 5
 
 ```
-Progress: [###-------] 25% — Phase 02 in progress (3/4 plans done)
+Progress: [########--] 83% — Phase 05 in progress (1/4 plans done)
 ```
 
 | Phase | Name | Status |
@@ -67,6 +67,9 @@ Progress: [###-------] 25% — Phase 02 in progress (3/4 plans done)
 | EST-* grouped in Phase 3 with FORN-* | Both are per-unit/supplier data with no dependency on RFQ; same delivery boundary |
 | UNIT-04 placed in Phase 5 | Report filters depend on the reports app existing — natural final phase |
 | `relatorios` app has no models | It imports from all other apps — architectural mandate from research |
+| Chaves KPI canônicas: req_abertas/cotacoes_andamento/gasto_mes/fornecedores_ativos | Contrato T-05-01 vence RESEARCH.md Pattern 1 (nomes obsoletos ignorados) |
+| user.default_unit (não user.unidade) | Campo real em accounts/models.py linha 44 — CONTEXT.md usa nome informal incorreto |
+| filtro month+year obrigatório em gasto_mes | Pitfall 2 — sem year acumula dados de anos anteriores em produção |
 | Modal reprovacao retorna HttpResponse vazio (outerHTML swap) | Remove linha da fila sem reload de pagina; simples e deterministico |
 | AprovarGestorView retorna HttpResponse vazio em sucesso | Remove linha da fila via outerHTML swap — comportamento correto para fila PENDENTE_GESTOR |
 
@@ -105,9 +108,9 @@ None.
 
 ## Session Continuity
 
-**Last action:** Completed Phase 02 Plan 03 — Gestor slice (fila, modal HTMX, e-mail transacional)
-**Next action:** Execute Phase 02 Plan 04 (Diretor slice)
-**Session started:** 2026-06-10
+**Last action:** Completed Phase 05 Plan 01 — App relatorios scaffold + service layer + DashboardView KPIs reais
+**Next action:** Execute Phase 05 Plan 02 (RelatorioRequiredMixin + GastosView + RequisicoesPainelView)
+**Session started:** 2026-06-12
 
 ---
 

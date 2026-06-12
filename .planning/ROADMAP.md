@@ -157,7 +157,7 @@ Plans:
 **Plans:** 4 plans
 **Wave 1**
 
-- [ ] 05-01-PLAN.md — App relatorios scaffold + service layer (KPIs/gastos/painel) + scaffold de testes Wave 0 + DashboardView enriquecida com KPIs reais
+- [x] 05-01-PLAN.md — App relatorios scaffold + service layer (KPIs/gastos/painel) + scaffold de testes Wave 0 + DashboardView enriquecida com KPIs reais
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -183,7 +183,7 @@ Plans:
 | 2. Requisitions & Approvals | 4/4 | Complete   | 2026-06-11 |
 | 3. Suppliers & Inventory | 3/3 | Complete   | 2026-06-11 |
 | 4. Quotations (RFQ) | 4/4 | Complete    | 2026-06-12 |
-| 5. Reports & Dashboard | 0/4 | In progress | - |
+| 5. Reports & Dashboard | 1/4 | In progress | - |
 
 ---
 
